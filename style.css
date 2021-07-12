@@ -1,0 +1,16 @@
+#wrapper {
+    width: 100%;
+}
+#header {
+    height: 90px;
+    background-color: #4378ed;
+}
+#header li {
+    float: right;
+    padding: 33px 20px;
+    list-style: none;
+}
+#header a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
