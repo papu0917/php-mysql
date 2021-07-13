@@ -1,6 +1,12 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
 #wrapper {
     width: 100%;
 }
+
 #header {
     height: 90px;
     background-color: #4378ed;
@@ -13,4 +19,97 @@
 #header a {
     text-decoration: none;
     color: #FFFFFF;
+}
+
+#content .main {
+    width: 900px;
+    margin: 60px auto;
+}
+#content .main a {
+    width: 70px;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    border-width: 1px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: #4378ed;
+}
+#content .main .complete {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    border-width: 1px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: #4378ed;
+}
+
+
+#content .main .uncomplete-button {
+    width: 60px;
+    float: left;
+}
+#content .main .complete-button {
+    width: 800px;
+    float: right;
+}
+
+#content .task-search {
+    padding: 20px 0px 40px;
+    clear: both;
+}
+#content .main .form {
+    width: 200px;
+    padding: 5px;
+}
+#content .main .button {
+    width: 75px;
+    padding: 5px;
+    display: inline-block;
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    border-width:1px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: #4378ed;
+}
+#content .main h2 {
+    margin-bottom: 40px;
+    font-size: 40px;
+    font-weight: 100;
+}
+
+/* table */
+.vertical-scroll-table{
+	color: #5e5e5e;
+    max-height: 120px;
+	overflow: auto;
+	overflow-x: hidden;
+}
+.vertical-scroll-table table{
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.vertical-scroll-table table thead tr{
+	font-weight: bold;
+	text-align: center;
+	background-color: #f3f4f5;
+}
+.vertical-scroll-table table tbody tr:nth-child(even){
+	background-color: #fafbfc;
+}
+.vertical-scroll-table table td{
+	width: 33%;
+	padding: 5px;
+	border: 1px solid #ddd;
 }
