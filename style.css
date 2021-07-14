@@ -89,27 +89,17 @@
 }
 
 /* table */
-.vertical-scroll-table{
-	color: #5e5e5e;
-    max-height: 120px;
-	overflow: auto;
-	overflow-x: hidden;
+#content .main .title-list ul {
+list-style: none;
 }
-.vertical-scroll-table table{
-	width: 100%;
-	border-collapse: collapse;
-	border-spacing: 0;
+#content .main .title-list li {
+float: left;
+margin: 0px 40px 40px 0px;
 }
-.vertical-scroll-table table thead tr{
-	font-weight: bold;
-	text-align: center;
-	background-color: #f3f4f5;
+#content .main .ltable-ist {
+    clear: both;
 }
-.vertical-scroll-table table tbody tr:nth-child(even){
-	background-color: #fafbfc;
+#content .main .ltable-ist td {
+    padding: 0px 95px 0px 0px;
 }
-.vertical-scroll-table table td{
-	width: 33%;
-	padding: 5px;
-	border: 1px solid #ddd;
-}
+
