@@ -32,9 +32,9 @@
             <h2 class="title">未完了タスク一覧</h2>
             <div class="title-list">
                 <ul>
-                    <li>タスク名</a></li>
-                    <li>締め切り</a></li>
-                    <li>カテゴリー</a></li>
+                    <li>タスク名</li>
+                    <li>締め切り</li>
+                    <li>カテゴリー</li>
                 </ul>
             </div>
 
