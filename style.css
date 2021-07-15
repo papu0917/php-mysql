@@ -1,0 +1,105 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+#wrapper {
+    width: 100%;
+}
+
+#header {
+    height: 90px;
+    background-color: #4378ed;
+}
+#header li {
+    float: right;
+    padding: 33px 20px;
+    list-style: none;
+}
+#header a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+#content .main {
+    width: 900px;
+    margin: 60px auto;
+}
+#content .main a {
+    width: 70px;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    border-width: 1px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: #4378ed;
+}
+#content .main .complete {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    border-width: 1px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: #4378ed;
+}
+
+
+#content .main .uncomplete-button {
+    width: 60px;
+    float: left;
+}
+#content .main .complete-button {
+    width: 800px;
+    float: right;
+}
+
+#content .task-search {
+    padding: 20px 0px 40px;
+    clear: both;
+}
+#content .main .form {
+    width: 200px;
+    padding: 5px;
+}
+#content .main .button {
+    width: 75px;
+    padding: 5px;
+    display: inline-block;
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    border-width:1px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: #4378ed;
+}
+#content .main h2 {
+    margin-bottom: 40px;
+    font-size: 40px;
+    font-weight: 100;
+}
+
+/* table */
+#content .main .title-list ul {
+list-style: none;
+}
+#content .main .title-list li {
+float: left;
+margin: 0px 40px 40px 0px;
+}
+#content .main .ltable-ist {
+    clear: both;
+}
+#content .main .ltable-ist td {
+    padding: 0px 95px 0px 0px;
+}
+
