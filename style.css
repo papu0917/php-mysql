@@ -53,15 +53,12 @@
 }
 
 
-#content .main .uncomplete-button {
-    width: 60px;
-    float: left;
+#content .main .box {
+    display: flex;
 }
-#content .main .complete-button {
-    width: 800px;
-    float: right;
+#content .main .box .uncomplete-button {
+    margin: 0px 10px 0px 0px;
 }
-
 #content .task-search {
     padding: 20px 0px 40px;
     clear: both;
@@ -103,3 +100,19 @@ margin: 0px 40px 40px 0px;
     padding: 0px 95px 0px 0px;
 }
 
+/* signup.php */
+#signup {
+    margin: 100px;
+    text-align: center;
+}
+#signup .index .width {
+    width: 223px;
+    margin: 10px;
+    height: 25px;
+}
+#signup .index .input {
+    width: 223px;
+    background-color: #4378ed;
+    color: #FFFFFF;
+    border: solid 1px;
+}
