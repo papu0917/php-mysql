@@ -8,15 +8,22 @@ $email = filter_input(INPUT_POST, 'email');
 $password = filter_input(INPUT_POST, 'password');
 $passwordConfirm = filter_input(INPUT_POST, 'passwordConfirm');
 
-function formChecker($name, $password, $passwordConfirm)
+function formChecker($name, $email, $password, $passwordConfirm)
 {
-    if (!$name) return "usernameを入力してください";
-    if (!$password) return "passwordを入力してください";
-    if (!$passwordConfirm) return "passwordConfirmを入力してください";
-    if ($password != $passwordConfirm) return "パスワードが一致しません";
+    $messages = [];
+    if (!$name) $messages[] = "usernameを入力してください";
+    if (!$email) $messages[] = "emilを入力してください";
+    if (!$password) $messages[] = "passwordを入力してください";
+    if (!$passwordConfirm) $messages[] = "passwordConfirmを入力してください";
+    if ($password != $passwordConfirm) $messages[] = "パスワードが一致しません";
+
+    return $messages;
 }
-$message = formChecker($name, $password, $passwordConfirm);
-echo $message;
+$messages = formChecker($name, $email, $password, $passwordConfirm);
+if (count($messages) != 0) {
+    require("messages.php");
+    die;
+}
 
 // (2) データベースに接続
 $pdo  = new PDO('mysql:charset=UTF8;dbname=todolist;host=localhost', 'samplephp', 'samplemysql');
@@ -46,8 +53,8 @@ if ($user['email'] === $email) {
 
     // (5) SQL実行
     $res = $stmt->execute();
-    $message = '登録できました';
-    $link = '<a href="signup.php">戻る</a>';
+    $message = '登録できました。';
+    $link = '<a href="signin.php">ログインはこちら</a>';
     // (6) データベースの接続解除
     $pdo = null;
 }
