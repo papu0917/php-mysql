@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 date_default_timezone_set('Asia/Tokyo');
 
 // (1) 登録するデータを用意
@@ -19,9 +20,15 @@ function formChecker($name, $email, $password, $passwordConfirm)
 
     return $messages;
 }
-$messages = formChecker($name, $email, $password, $passwordConfirm);
-if (count($messages) != 0) {
-    require("messages.php");
+
+$errorMessages = formChecker($name, $email, $password, $passwordConfirm);
+if (count($errorMessages) != 0) {
+    $_SESSION['errorMessages'] = $errorMessages;
+    $_SESSION['formInputs'] = [
+        'name' => $name,
+        'email' => $email,
+    ];
+    header('Location: /signup.php');
     die;
 }
 

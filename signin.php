@@ -12,8 +12,8 @@
         <div class="index">
             <p>ログイン</p>
             <form action="signinComplete.php" method="post">
-                <input class="width" type="text" name="email" size="10" placeholder="Email" /><br />
-                <input class="width" ype="text" name="password" size="30" placeholder="Password" /><br />
+                <input class="width" type="text" name="email" placeholder="Email" /><br />
+                <input class="width" type="password" name="password" placeholder="Password" /><br />
                 <input class="input" type="submit" value="ログイン" />
             </form>
             <a href="signup.php">アカウントを作る</a>
