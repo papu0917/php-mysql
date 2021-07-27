@@ -56,7 +56,7 @@ class PasswordChecker
         $this->password = $password;
     }
 
-    public function checker()
+    public function checker(): string
     {
         if (password_verify($this->password, $this->user['password'])) {
             $_SESSION['id'] = $this->user['id'];
