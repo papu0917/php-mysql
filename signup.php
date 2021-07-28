@@ -1,3 +1,10 @@
+<?php
+session_start();
+$errorMessages = $_SESSION['errorMessages'] ?? [];
+$formInputs = $_SESSION['formInputs'] ?? [];
+unset($_SESSION['errorMessages'], $_SESSION['formInputs']);
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -11,12 +18,31 @@
     <div id="signup">
         <div class="index">
             <p>会員登録</p>
+            <?php if (!empty($errorMessages)) : ?>
+                <ul class="error_list">
+                    <?php foreach ($errorMessages as $errorMessage) : ?>
+                        <li><?php echo $errorMessage; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+
+
             <form action="signupComplete.php" method="post">
-                <input class="width" type="text" name="name" size="10" placeholder="User name" /><br />
-                <input class="width" ype="text" name="email" size="30" placeholder="Email" /><br />
-                <input class="width" type="text" name="password" size="30" placeholder="Password"><br />
-                <input class="width" type="text" name="passwordConfirm" size="30" placeholder="Password確認"><br />
-                <input class="input" type="submit" value="アカウント作成" />
+                <div>
+                    <input class="width" type="text" name="name" placeholder="User name" value="<?php echo $formInputs['name'] ?? ''; ?>" />
+                </div>
+                <div>
+                    <input class="width" type="text" name="email" placeholder="Email" value="<?php echo $formInputs['email'] ?? ''; ?>" />
+                </div>
+                <div>
+                    <input class="width" type="password" name="password" placeholder="Password">
+                </div>
+                <div>
+                    <input class="width" type="password" name="passwordConfirm" placeholder="Password確認">
+                </div>
+                <div>
+                    <input class="input" type="submit" value="アカウント作成" />
+                </div>
             </form>
             <p>topへ戻る</p>
         </div>

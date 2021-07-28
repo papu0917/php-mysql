@@ -127,3 +127,20 @@ margin: 0px 40px 40px 0px;
 	border: 1px solid #ff2e5a;
 	border-radius: 5px;
 }
+
+/* create.php */
+#tasks {
+    width: 500px;
+    margin: 200px auto; 
+}
+#tasks .index {
+    width: 500px;
+    margin: 15px auto;
+    display: flex;
+}
+#tasks .index .width {
+    padding: 4px 0px 4px 0px;
+}
+#tasks .index .input {
+    padding: 1px 5px 1px 5px;
+}
