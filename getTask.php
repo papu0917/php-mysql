@@ -2,7 +2,7 @@
 $pdo  = new PDO('mysql:charset=UTF8;dbname=todolist;host=localhost', 'samplephp', 'samplemysql');
 $userId = $_SESSION['id'];
 if (!$userId) {
-    header('Location: /signup.php');
+    header('Location: /signin.php');
     die;
 }
 $stmt = $pdo->prepare("select * from tasks where user_id = :user_id");
