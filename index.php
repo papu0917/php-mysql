@@ -1,5 +1,6 @@
 <?php
 session_start();
+require('getTask.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,20 +39,20 @@ session_start();
             </div>
             <h2 class="title">未完了タスク一覧</h2>
             <div class="title-list">
-                <ul>
-                    <li>タスク名</li>
-                    <li>締め切り</li>
-                    <li>カテゴリー</li>
-                </ul>
+                <div class="task">タスク名</div>
+                <div class="deadline">締め切り</div>
+                <div class="category">カテゴリー</div>
             </div>
 
             <div>
-                <table class="ltable-ist">
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                    </tr>
+                <table class="table-list">
+                    <?php foreach ($dataLists as $data) : ?>
+                        <tr>
+                            <td><?php echo $data['contents']; ?></td>
+                            <td><?php echo $data['deadline']; ?></td>
+                            <td>1</td>
+                        </tr>
+                    <?php endforeach; ?>
                 </table>
             </div>
         </div>

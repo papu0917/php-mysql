@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+require_once(__DIR__ . '/Dao/UserDao.php');
 date_default_timezone_set('Asia/Tokyo');
 
 // (1) 登録するデータを用意
@@ -46,20 +47,9 @@ if ($user['email'] === $email) {
     $message = '同じメールアドレスが存在します。';
     $link = '<a href="signup.php">戻る</a>';
 } else {
-    // (3) SQL作成
-    $stmt = $pdo->prepare("INSERT INTO users (name, email, password
-) VALUES (
-	:name, :email, :password
-)");
-
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-    // (4) 登録するデータをセット
-    $stmt->bindValue(':name', $name, PDO::PARAM_STR);
-    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-    $stmt->bindValue(':password', $passwordHash, PDO::PARAM_STR);
-
-    // (5) SQL実行
-    $res = $stmt->execute();
+    $userDao = new UserDao();
+    $user = $userDao->insert($name, $email, $passwordHash);
     $message = '登録できました。';
     $link = '<a href="signin.php">ログインはこちら</a>';
     // (6) データベースの接続解除

@@ -86,18 +86,15 @@
 }
 
 /* table */
-#content .main .title-list ul {
-list-style: none;
+
+#content .main .title-list {
+display: flex;
 }
-#content .main .title-list li {
-float: left;
-margin: 0px 40px 40px 0px;
+#content .main .title-list .deadline {
+margin: 0px 120px 20px 260px;
 }
-#content .main .ltable-ist {
-    clear: both;
-}
-#content .main .ltable-ist td {
-    padding: 0px 95px 0px 0px;
+#content .main .table-list td {
+padding: 0px 95px 0px 0px;
 }
 
 /* signup.php */
