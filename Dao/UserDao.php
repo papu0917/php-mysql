@@ -22,7 +22,7 @@ final class UserDao
     {
     }
 
-    public function insert($name, $email, $passwordHash)
+    public function insert(string $name, string $email, string $passwordHash)
     {
         $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
         $stmt->bindValue(':name', $name, PDO::PARAM_STR);
