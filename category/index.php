@@ -20,9 +20,15 @@ require('getCategories.php');
                 <input class="input" type="submit" value="登録" />
             </form>
         </div>
-        <?php foreach ($categories as $category) : ?>
-            <?php echo $category['name']; ?>
-        <?php endforeach; ?>
+
+        <table class="tablie-list">
+            <?php foreach ($categories as $category) : ?>
+                <tr>
+                    <td><?php echo $category['name']; ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+
     </div>
 </div>
 

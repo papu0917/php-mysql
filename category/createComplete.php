@@ -15,5 +15,4 @@ if (!$name) {
     $categoryName = $categoryDao->insert($name);
     header('Location: /category/index.php');
 }
-
 $pdo = null;

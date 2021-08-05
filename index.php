@@ -20,7 +20,7 @@ require('getTask.php');
                 <?php else : ?>
                     <li><a href="">ログイン</a></li>
                 <?php endif; ?>
-                <li><a href="">カテゴリー覧</a></li>
+                <li><a href="../Category/index.php">カテゴリー覧</a></li>
                 <li><a href="create.php">＋</a></li>
             </ul>
         </div>
@@ -50,7 +50,6 @@ require('getTask.php');
                         <tr>
                             <td><?php echo $data['contents']; ?></td>
                             <td><?php echo $data['deadline']; ?></td>
-                            <td>1</td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
