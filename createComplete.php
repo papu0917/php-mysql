@@ -16,8 +16,6 @@ $stmt->bindValue(':contents', $contents, PDO::PARAM_STR);
 $stmt->bindValue(':category_id', $category_id, PDO::PARAM_STR);
 $stmt->bindValue(':deadline', $deadline, PDO::PARAM_STR);
 $res = $stmt->execute();
-$message = '登録できました。';
 
-$pdo = null;
-
-echo $message;
+header('Location: /index.php');
+die;
