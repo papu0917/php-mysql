@@ -42,4 +42,9 @@ final class Session
     {
         unset($_SESSION['errors']);
     }
+
+    public function clearAuth(): void
+    {
+        unset($_SESSION['id'], $_SESSION['name']);
+    }
 }

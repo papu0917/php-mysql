@@ -1,6 +1,6 @@
 <?php
-session_start();
-// require('getTask.php');
+// session_start();
+require('getCategories.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,6 +20,15 @@ session_start();
                 <input class="input" type="submit" value="登録" />
             </form>
         </div>
+
+        <table class="tablie-list">
+            <?php foreach ($categories as $category) : ?>
+                <tr>
+                    <td><?php echo $category['name']; ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+
     </div>
 </div>
 

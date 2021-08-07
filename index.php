@@ -1,4 +1,5 @@
 <?php
+ini_set('display_errors', 'on');
 session_start();
 require('getTask.php');
 ?>
@@ -16,11 +17,11 @@ require('getTask.php');
         <div class="header-list">
             <ul>
                 <?php if (isset($_SESSION['id'])) : ?>
-                    <li><a href="">ログアウト</a></li>
+                    <li><a href="logout.php">ログアウト</a></li>
                 <?php else : ?>
                     <li><a href="">ログイン</a></li>
                 <?php endif; ?>
-                <li><a href="">カテゴリー覧</a></li>
+                <li><a href="../Category/index.php">カテゴリー覧</a></li>
                 <li><a href="create.php">＋</a></li>
             </ul>
         </div>
@@ -50,7 +51,7 @@ require('getTask.php');
                         <tr>
                             <td><?php echo $data['contents']; ?></td>
                             <td><?php echo $data['deadline']; ?></td>
-                            <td>1</td>
+                            <td><?php echo $data['name'] ?? ''; ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
