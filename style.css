@@ -109,6 +109,8 @@ padding: 0px 95px 0px 0px;
 }
 #signup .index .input {
     width: 223px;
+    height: 25px;
+    margin-bottom: 10px;
     background-color: #4378ed;
     color: #FFFFFF;
     border: solid 1px;

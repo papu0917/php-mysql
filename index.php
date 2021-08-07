@@ -47,11 +47,11 @@ require('getTask.php');
 
             <div>
                 <table class="table-list">
-                    <?php foreach ($dataLists as $data) : ?>
+                    <?php foreach ($dataLists as $dataList) : ?>
                         <tr>
-                            <td><?php echo $data['contents']; ?></td>
-                            <td><?php echo $data['deadline']; ?></td>
-                            <td><?php echo $data['name'] ?? ''; ?></td>
+                            <td><?php echo $dataList['contents']; ?></td>
+                            <td><?php echo $dataList['deadline']; ?></td>
+                            <td><?php echo $dataList['name'] ?? ''; ?></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
