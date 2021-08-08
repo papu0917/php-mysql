@@ -1,6 +1,5 @@
 <?php
 
-// session_start();
 require_once(__DIR__ . '/../Dao/CategoryDao.php');
 // require_once(dirname(__FILE__) . '/../Dao/CategoryDao.php');
 date_default_timezone_set('Asia/Tokyo');

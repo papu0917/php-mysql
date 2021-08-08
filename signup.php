@@ -14,7 +14,7 @@ unset($_SESSION['errorMessages'], $_SESSION['formInputs']);
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="color">
     <div id="signup">
         <div class="index">
             <p>会員登録</p>
@@ -44,7 +44,7 @@ unset($_SESSION['errorMessages'], $_SESSION['formInputs']);
                     <input class="input" type="submit" value="アカウント作成" />
                 </div>
             </form>
-            <p>topへ戻る</p>
+            <a href="/signin.php">ログイン画面</a>
         </div>
     </div>
 </body>

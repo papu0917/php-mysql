@@ -2,9 +2,17 @@
     margin: 0px;
     padding: 0px;
 }
+body {
+    width: 100%;
+}
+.color {
+
+    background-color: #efefef
+}
 
 #wrapper {
     width: 100%;
+    font-family: 'Noto Serif JP', serif;
 }
 
 #header {
@@ -86,21 +94,41 @@
 }
 
 /* table */
-
+#content thead {
+text-align: left;
+/* width: calc( 100% - 1em ); */
+}
+#content head:after {
+content: "";
+height: 1px;
+width: 100%;
+padding: 15px 0;
+display: block;
+}
+#content tbody {
+display:block;
+max-height:500px;
+overflow-y:auto;
+}
+#content .main thead, tbody tr {
+display:table;
+width:100%;
+table-layout:fixed;
+}
 #content .main .title-list {
 display: flex;
 }
 #content .main .title-list .deadline {
 margin: 0px 120px 20px 260px;
 }
-#content .main .table-list td {
-padding: 0px 95px 0px 0px;
-}
 
 /* signup.php */
 #signup {
-    margin: 100px;
+    width: 30%;
+    margin: 100px auto;
+    padding: 40px 0px 40px 0px;
     text-align: center;
+    background-color: #FFFFFF;
 }
 #signup .index .width {
     width: 223px;
@@ -128,18 +156,55 @@ padding: 0px 95px 0px 0px;
 }
 
 /* create.php */
-#tasks {
-    width: 500px;
-    margin: 200px auto; 
+#tasks select {
+    width: 13%;
+    height: 27px;
 }
 #tasks .index {
-    width: 500px;
-    margin: 15px auto;
-    display: flex;
+    text-align: center;
+    margin: 100px auto;
 }
-#tasks .index .width {
+#tasks .index .box-001 {
+    width: 13%;
+    margin-bottom: 10px;
     padding: 4px 0px 4px 0px;
 }
+#tasks .index .box-002 {
+    width: 13%;
+    margin-bottom: 10px;
+}
+#tasks .index .box-003 {
+margin-bottom: 315px;
+}
 #tasks .index .input {
+    width: 13%;
+    margin: 10px;
     padding: 1px 5px 1px 5px;
+    background-color: #4378ed;
+    color: #FFFFFF;
+    border: solid 1px;
+}
+
+/* footer.php */
+#footer .footer {
+    width: 100%;
+    height: 90px;
+    background-color: #4378ed;
+}
+
+
+/* category.php */
+#category .content {
+width: 20%;
+margin: 50px auto;
+}
+#category .index {
+margin: 20px 0px 20px 0px;   
+}
+#category tr {
+display: table-row-group;
+}
+#category a {
+    display: block;
+    margin: 0px 0px 0px 22px;
 }

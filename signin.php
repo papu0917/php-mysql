@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="color">
     <div id="signup">
         <div class="index">
             <p>ログイン</p>

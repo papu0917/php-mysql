@@ -5,7 +5,7 @@ if (!$userId) {
     header('Location: /signin.php');
     die;
 }
-$stmt = $pdo->prepare("select * from tasks left join categories on  category_id = categories.id");
+$stmt = $pdo->prepare("select * from tasks left join categories on  tasks.category_id = categories.id");
 // $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
 $res = $stmt->execute();
 $dataLists = $stmt->fetchAll(PDO::FETCH_ASSOC);
