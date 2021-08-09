@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+require('getTask.php');
 require('Category/getCategories.php');
 ?>
 <!DOCTYPE html>

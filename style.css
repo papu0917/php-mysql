@@ -98,7 +98,7 @@ body {
 text-align: left;
 /* width: calc( 100% - 1em ); */
 }
-#content head:after {
+#content thead:after {
 content: "";
 height: 1px;
 width: 100%;
@@ -125,7 +125,7 @@ margin: 0px 120px 20px 260px;
 /* signup.php */
 #signup {
     width: 30%;
-    margin: 100px auto;
+    margin: 150px auto;
     padding: 40px 0px 40px 0px;
     text-align: center;
     background-color: #FFFFFF;
@@ -207,4 +207,12 @@ display: table-row-group;
 #category a {
     display: block;
     margin: 0px 0px 0px 22px;
+}
+/* signinComplete.php */
+.message {
+    text-align: center;
+    margin: 160px 0px 370px 0px;
+}
+.message p {
+    margin: 10px;
 }

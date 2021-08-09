@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>タスク管理</title>
+    <title>ログイン</title>
     <link rel="stylesheet" href="style.css">
 </head>
 

@@ -17,9 +17,28 @@ if ($isValid) {
     $session->setAuth($user['id'], $user['name']);
 }
 
-?>
-<p><?php echo $signInViewModel->message(); ?></p>
 
-<a href="<?php echo $signInViewModel->link(); ?>">
-    <?php echo $signInViewModel->linkText(); ?>
-</a>
+?>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<div id="wrapper">
+    <?php require('header.php'); ?>
+    <div class="message">
+        <p><?php echo $signInViewModel->message(); ?></p>
+
+        <a href="<?php echo $signInViewModel->link(); ?>">
+            <?php echo $signInViewModel->linkText(); ?>
+        </a>
+    </div>
+    <?php require('footer.php'); ?>
+
+</div>
+
+</html>
