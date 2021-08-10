@@ -10,11 +10,11 @@ unset($_SESSION['errorMessages'], $_SESSION['formInputs']);
 
 <head>
     <meta charset="utf-8">
-    <title>タスク管理</title>
+    <title>会員登録</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="color">
     <div id="signup">
         <div class="index">
             <p>会員登録</p>
@@ -38,13 +38,13 @@ unset($_SESSION['errorMessages'], $_SESSION['formInputs']);
                     <input class="width" type="password" name="password" placeholder="Password">
                 </div>
                 <div>
-                    <input class="width" type="password" name="passwordConfirm" placeholder="Password確認">
+                    <input class="width" type="password" name="passwordConfirm" placeholder="Password 確認">
                 </div>
                 <div>
                     <input class="input" type="submit" value="アカウント作成" />
                 </div>
             </form>
-            <p>topへ戻る</p>
+            <a href="/signin.php">ログイン画面へ</a>
         </div>
     </div>
 </body>

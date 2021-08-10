@@ -1,4 +1,6 @@
 <?php
+session_start();
+require('getTask.php');
 require('Category/getCategories.php');
 ?>
 <!DOCTYPE html>
@@ -11,22 +13,33 @@ require('Category/getCategories.php');
 </head>
 
 <body>
-    <div id="tasks">
-        <div class="index">
-            <form action="createComplete.php" method="post">
-                <input class="width" type="text" name="contents" placeholder="タスクを追加" />
-                <input class="" type="date" name="deadline" placeholder="" />
-                <select name="category">
-                    <?php foreach ($categories as $value) : ?>
-                        <?php echo '<option value="', $value['id'], '">', $value['name'], '</option>'; ?>
-                    <?php endforeach; ?>
-                </select>
+    <div id="wrapper">
+        <div id="tasks">
+            <?php require('./header.php'); ?>
+            <div class="index">
 
-                <input class="input" type="submit" value="追加" />
-            </form>
+                <form action="createComplete.php" method="post">
+                    <div class="box">
+                        <input class="box-001" type="text" name="contents" placeholder="タスクを追加" />
+                    </div>
+                    <div class="box">
+                        <input class="box-002" type="date" name="deadline" placeholder="" />
+                    </div>
+                    <div class="box">
+                        <select name="category">
+                            <?php foreach ($categories as $value) : ?>
+                                <?php echo '<option value="', $value['id'], '">', $value['name'], '</option>'; ?>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                    <input class="input" type="submit" value="追加" />
+                </form>
+                <div class="box-003"><a href="index.php">戻る</a></div>
+            </div>
+
         </div>
 
-        <a href="index.php">戻る</a>
+        <?php require('./footer.php'); ?>
     </div>
 </body>
 

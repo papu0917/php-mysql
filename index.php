@@ -13,19 +13,7 @@ require('getTask.php');
 </head>
 
 <div id="wrapper">
-    <div id="header">
-        <div class="header-list">
-            <ul>
-                <?php if (isset($_SESSION['id'])) : ?>
-                    <li><a href="logout.php">ログアウト</a></li>
-                <?php else : ?>
-                    <li><a href="">ログイン</a></li>
-                <?php endif; ?>
-                <li><a href="../Category/index.php">カテゴリー覧</a></li>
-                <li><a href="create.php">＋</a></li>
-            </ul>
-        </div>
-    </div>
+    <?php require('header.php'); ?>
     <div id="content">
         <div class="main">
             <div class="box">
@@ -39,25 +27,28 @@ require('getTask.php');
                 </form>
             </div>
             <h2 class="title">未完了タスク一覧</h2>
-            <div class="title-list">
-                <div class="task">タスク名</div>
-                <div class="deadline">締め切り</div>
-                <div class="category">カテゴリー</div>
-            </div>
-
-            <div>
-                <table class="table-list">
-                    <?php foreach ($dataLists as $data) : ?>
+            <table class="table-list">
+                <thead>
+                    <tr>
+                        <th>タスク名</th>
+                        <th>締め切り</th>
+                        <th>カテゴリー</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($dataLists as $dataList) : ?>
                         <tr>
-                            <td><?php echo $data['contents']; ?></td>
-                            <td><?php echo $data['deadline']; ?></td>
-                            <td><?php echo $data['name'] ?? ''; ?></td>
+                            <td><?php echo $dataList['contents']; ?></td>
+                            <td><?php echo $dataList['deadline']; ?></td>
+                            <td><?php echo $dataList['name']; ?></td>
                         </tr>
                     <?php endforeach; ?>
-                </table>
-            </div>
+                </tbody>
+            </table>
+
         </div>
     </div>
+    <?php require('footer.php'); ?>
 </div>
 
 </html>

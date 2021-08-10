@@ -11,7 +11,7 @@ class SignInViewModel
 
     public function message(): string
     {
-        return $this->isValid ? 'ログインに成功しました' : 'メールアドレスもしくはパスワードが間違っています';
+        return $this->isValid ? 'ログインに成功しました!!' : 'メールアドレスもしくはパスワードが間違っています';
     }
 
     public function link(): string
