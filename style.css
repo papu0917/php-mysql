@@ -98,6 +98,12 @@ body {
 text-align: left;
 /* width: calc( 100% - 1em ); */
 }
+#content .task-name {
+width: 25%;
+}
+#content .dead-line {
+width: 25%;
+}
 #content thead:after {
 content: "";
 height: 1px;
@@ -207,6 +213,11 @@ display: table-row-group;
 #category a {
     display: block;
     margin: 0px 0px 0px 22px;
+}
+#category .botann {
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
 }
 /* signinComplete.php */
 .message {

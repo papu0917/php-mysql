@@ -27,11 +27,11 @@ require('getTask.php');
                 </form>
             </div>
             <h2 class="title">未完了タスク一覧</h2>
-            <table class="table-list">
+            <table class="table">
                 <thead>
                     <tr>
-                        <th>タスク名</th>
-                        <th>締め切り</th>
+                        <th class="task-name">タスク名</th>
+                        <th class="dead-line">締め切り</th>
                         <th>カテゴリー</th>
                     </tr>
                 </thead>
@@ -41,6 +41,7 @@ require('getTask.php');
                             <td><?php echo $dataList['contents']; ?></td>
                             <td><?php echo $dataList['deadline']; ?></td>
                             <td><?php echo $dataList['name']; ?></td>
+                            <td><a href="edit.php?id=<?php echo $dataList['id']; ?>">編集</a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

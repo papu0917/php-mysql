@@ -20,6 +20,8 @@ final class UserDao
 
     public function findById(int $id)
     {
+        // $sql = "select * from tasks left join users on tasks.user_id = users.id";
+
     }
 
     public function insert(string $name, string $email, string $passwordHash)
