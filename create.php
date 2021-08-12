@@ -1,5 +1,8 @@
 <?php
 session_start();
+$errorMessages = $_SESSION['errorMessages'] ?? [];
+$formInputs = $_SESSION['formInputs'] ?? [];
+unset($_SESSION['errorMessages'], $_SESSION['formInputs']);
 require('getTask.php');
 require('Category/getCategories.php');
 ?>
@@ -17,13 +20,20 @@ require('Category/getCategories.php');
         <div id="tasks">
             <?php require('./header.php'); ?>
             <div class="index">
+                <?php if (!empty($errorMessages)) : ?>
+                    <ul class="error_list">
+                        <?php foreach ($errorMessages as $errorMessage) : ?>
+                            <li><?php echo $errorMessage; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
 
                 <form action="createComplete.php" method="post">
                     <div class="box">
-                        <input class="box-001" type="text" name="contents" placeholder="タスクを追加" />
+                        <input class="box-001" type="text" name="contents" placeholder="タスクを追加" value="<?php echo $formInputs['contents'] ?? ''; ?>" />
                     </div>
                     <div class="box">
-                        <input class="box-002" type="date" name="deadline" placeholder="" />
+                        <input class="box-002" type="date" name="deadline" placeholder="" value="<?php echo $formInputs['deadline'] ?? ''; ?>" />
                     </div>
                     <div class="box">
                         <select name="category">
