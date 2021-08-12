@@ -13,11 +13,11 @@ $passwordConfirm = filter_input(INPUT_POST, 'passwordConfirm');
 function formChecker($name, $email, $password, $passwordConfirm)
 {
     $messages = [];
-    if (!$name) $messages[] = "usernameを入力してください";
-    if (!$email) $messages[] = "emilを入力してください";
-    if (!$password) $messages[] = "passwordを入力してください";
-    if (!$passwordConfirm) $messages[] = "passwordConfirmを入力してください";
-    if ($password != $passwordConfirm) $messages[] = "パスワードが一致しません";
+    if (!$name) $messages[] = "User nameを入力してください";
+    if (!$email) $messages[] = "Emailを入力してください";
+    if (!$password) $messages[] = "Passwordを入力してください";
+    if (!$passwordConfirm) $messages[] = "Password 確認を入力してください";
+    if ($password != $passwordConfirm) $messages[] = "Passwordが一致しません";
 
     return $messages;
 }

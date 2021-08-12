@@ -28,13 +28,14 @@ require('../getTask.php');
                     <?php foreach ($categories as $category) : ?>
                         <tr class="category">
                             <td><?php echo $category['name']; ?></td>
-                            <td><a href="/">編集</a></td>
+                            <td><a href="edit.php?id=<?php echo $category['id']; ?>">編集</a></td>
                             <td><a href="/">削除</a></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
             </div>
         </div>
+        <a class="botann" href="../index.php">戻る</a>
     </div>
     <?php require('../footer.php'); ?>
 </div>
