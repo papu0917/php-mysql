@@ -1,5 +1,9 @@
 <?php
 session_start();
+$errorMessages = $_SESSION['errorMessages'] ?? [];
+$formInputs = $_SESSION['formInputs'] ?? [];
+unset($_SESSION['errorMessages'], $_SESSION['formInputs']);
+
 require('getTask.php');
 require('Category/getCategories.php');
 
@@ -9,8 +13,6 @@ $stmt = $pdo->prepare("select tasks.id, tasks.contents, tasks.deadline, categori
 $stmt->bindValue(':taskId', $taskId, PDO::PARAM_INT);
 $res = $stmt->execute();
 $data = $stmt->fetch(PDO::FETCH_ASSOC);
-// var_dump($data);
-// die;
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,6 +28,14 @@ $data = $stmt->fetch(PDO::FETCH_ASSOC);
         <div id="tasks">
             <?php require('./header.php'); ?>
             <div class="index">
+
+                <?php if (!empty($errorMessages)) : ?>
+                    <ul class="error_list">
+                        <?php foreach ($errorMessages as $errorMessage) : ?>
+                            <li><?php echo $errorMessage; ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
 
                 <form action="update.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $taskId; ?>">
