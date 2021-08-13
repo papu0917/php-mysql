@@ -17,7 +17,7 @@ $category = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
     <meta charset="utf-8">
     <title>カテゴリー編集</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>

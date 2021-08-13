@@ -16,8 +16,6 @@ if ($isValid) {
     $session = Session::getInstance();
     $session->setAuth($user['id'], $user['name']);
 }
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,7 +23,7 @@ if ($isValid) {
 <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <div id="wrapper">
@@ -38,7 +36,6 @@ if ($isValid) {
         </a>
     </div>
     <?php require('footer.php'); ?>
-
 </div>
 
 </html>
