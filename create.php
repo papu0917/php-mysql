@@ -12,7 +12,7 @@ require('Category/getCategories.php');
 <head>
     <meta charset="utf-8">
     <title>タスク追加</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>

@@ -13,7 +13,7 @@ if (!$userId) {
 // var_dump($user);
 // die;
 
-$stmt = $pdo->prepare("select tasks.id, tasks.contents, tasks.deadline, categories.name from tasks left join categories on tasks.category_id = categories.id where user_id = :user_id");
+$stmt = $pdo->prepare("select tasks.id, tasks.contents, tasks.deadline, categories.name from tasks left join categories on tasks.category_id = categories.id where user_id = :user_id and status = 0");
 $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
 $res = $stmt->execute();
 $dataLists = $stmt->fetchAll(PDO::FETCH_ASSOC);

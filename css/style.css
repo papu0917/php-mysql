@@ -99,10 +99,10 @@ text-align: left;
 /* width: calc( 100% - 1em ); */
 }
 #content .task-name {
-width: 25%;
+width: 29%;
 }
 #content .dead-line {
-width: 25%;
+width: 15%;
 }
 #content thead:after {
 content: "";
@@ -121,13 +121,29 @@ display:table;
 width:100%;
 table-layout:fixed;
 }
+#content .main .contents {
+width: 30%;
+}
 #content .main .title-list {
 display: flex;
 }
 #content .main .title-list .deadline {
 margin: 0px 120px 20px 260px;
 }
+#content .main .botann1 {
+font-size: 16px;
 
+}
+#content .main .botann2 {
+margin: 0px 0px 0px -40px;
+font-size: 16px;
+background-color: green;
+}
+#content .main .botann3 {
+margin: 0px 0px 0px -80px;
+font-size: 16px;
+background-color: red;
+}
 /* signup.php */
 #signup {
     width: 30%;
@@ -201,20 +217,53 @@ margin-bottom: 315px;
 
 /* category.php */
 #category .content {
-width: 20%;
+width: 23%;
 margin: 50px auto;
+text-align: center;
 }
 #category .index {
 margin: 20px 0px 20px 0px;   
 }
+#category .index .width {
+    padding: 5px 0px;
+}
+#category .index .input {
+    padding: 3px 15px;
+}
 #category tr {
 display: table-row-group;
 }
-#category a {
-    display: block;
-    margin: 0px 0px 0px 22px;
+#category .botann1 {
+    margin: 0px 0px 0px 10px;
+    width: 70px;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    border-width: 1px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: green;
+}
+#category .botann2 {
+    margin: 0px 0px 0px 5px;
+    width: 70px;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    border-width: 1px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: red;
 }
 #category .botann {
+    width: 10%;
+    margin: 0px auto;
     margin-bottom: 10px;
     display: block;
     text-align: center;

@@ -9,7 +9,7 @@ require('../getTask.php');
 <head>
     <meta charset="utf-8">
     <title>カテゴリ一覧</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <div id="wrapper">
@@ -28,8 +28,8 @@ require('../getTask.php');
                     <?php foreach ($categories as $category) : ?>
                         <tr class="category">
                             <td><?php echo $category['name']; ?></td>
-                            <td><a href="edit.php?id=<?php echo $category['id']; ?>">編集</a></td>
-                            <td><a href="/">削除</a></td>
+                            <td><a class="botann1" href="edit.php?id=<?php echo $category['id']; ?>">編集</a></td>
+                            <td><a class="botann2" href="delete.php?id=<?php echo $category['id']; ?>">削除</a></td>
                         </tr>
                     <?php endforeach; ?>
                 </table>
