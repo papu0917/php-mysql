@@ -1,15 +1,11 @@
 <?php
 session_start();
-// require('getTask.php');
+require_once(__DIR__ . '/../Dao/CategoryDao.php');
 require('getCategories.php');
 
 $category_id = $_GET['id'];
-
-$pdo  = new PDO('mysql:charset=UTF8;dbname=todolist;host=localhost', 'samplephp', 'samplemysql');
-$stmt = $pdo->prepare("select * from categories where categories.id = :category_id");
-$stmt->bindValue(':category_id', $category_id, PDO::PARAM_INT);
-$res = $stmt->execute();
-$category = $stmt->fetch(PDO::FETCH_ASSOC);
+$categoryDao = new CategoryDao();
+$category = $categoryDao->findById($category_id);
 ?>
 <!DOCTYPE html>
 <html>

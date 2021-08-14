@@ -1,6 +1,11 @@
 <?php
 
-function redirect(): void
+function redirectIndex(): void
 {
     header('Location: /index.php');
+}
+
+function redirectCategoryIndex(): void
+{
+    header('Location: /category/index.php');
 }
