@@ -1,12 +1,12 @@
 <?php
+require_once __DIR__ . '/Dao.php';
 
-final class UserDao
+final class UserDao extends Dao
 {
-    private $pdo;
 
     public function __construct()
     {
-        $this->pdo = new PDO('mysql:charset=UTF8;dbname=todolist;host=localhost', 'samplephp', 'samplemysql');
+        parent::__construct();
     }
 
     public function findByEmail(string $email): array
@@ -20,8 +20,11 @@ final class UserDao
 
     public function findById(int $id)
     {
-        // $sql = "select * from tasks left join users on tasks.user_id = users.id";
-
+        $sql = "select * from users where id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function insert(string $name, string $email, string $passwordHash)

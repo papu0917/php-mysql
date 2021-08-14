@@ -10,7 +10,7 @@ $category_id = filter_input(INPUT_POST, 'category');
 function formChecker($contents, $deadline)
 {
     $form = [];
-    if (!$contents) $form[] = "タスクを入力してくださ";
+    if (!$contents) $form[] = "タスクを入力してください";
     if (!$deadline) $form[] = "日付を入力してください";
     return $form;
 }

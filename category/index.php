@@ -29,7 +29,13 @@ require('../getTask.php');
                         <tr class="category">
                             <td><?php echo $category['name']; ?></td>
                             <td><a class="botann1" href="edit.php?id=<?php echo $category['id']; ?>">編集</a></td>
-                            <td><a class="botann2" href="delete.php?id=<?php echo $category['id']; ?>">削除</a></td>
+                            <td>
+                                <form action="delete.php" method="post">
+                                    <input type="submit" class="botann2" name="delete" value="削除" />
+                                    <input type="hidden" name="id" value="<?php echo $category['id']; ?>">
+                                </form>
+                            </td>
+                            <!-- <td><a class="botann2" href="delete.php?id=<?php echo $category['id']; ?>">削除</a></td> -->
                         </tr>
                     <?php endforeach; ?>
                 </table>

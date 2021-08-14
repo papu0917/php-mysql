@@ -1,5 +1,18 @@
 <?php
-$pdo  = new PDO('mysql:charset=UTF8;dbname=todolist;host=localhost', 'samplephp', 'samplemysql');
-$stmt = $pdo->prepare('DELETE FROM categories WHERE id = :id');
-$stmt->execute(array(':id' => $_GET["id"]));
-header('Location: /category/index.php');
+session_start();
+require_once(__DIR__ . '/../Dao/CategoryDao.php');
+require_once(__DIR__ . '/../Dao/UserDao.php');
+
+$id = filter_input(INPUT_POST, 'id');
+$user_id = $_SESSION['id'];
+
+$userDao = new UserDao();
+$userId = $userDao->findById($user_id);
+
+if ($userId['id'] == $user_id) {
+    $categoryDao = new CategoryDao();
+    $delete = $categoryDao->delete($id);
+    header('Location: /category/index.php');
+} else {
+    echo "削除できませんでした";
+}
