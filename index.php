@@ -36,14 +36,14 @@ require('getTask.php');
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($dataLists as $dataList) : ?>
+                    <?php foreach ($incompleteTasks as $incompleteTask) : ?>
                         <tr>
-                            <td class="contents"><?php echo $dataList['contents']; ?></td>
-                            <td><?php echo $dataList['deadline']; ?></td>
-                            <td><?php echo $dataList['name']; ?></td>
-                            <td><a class="botann1" href="complete/updateStatus.php?id=<?php echo $dataList['id']; ?>">完了</a></td>
-                            <td><a class="botann2" href="edit.php?id=<?php echo $dataList['id']; ?>">編集</a></td>
-                            <td><a class="botann3" href="delete.php?id=<?php echo $dataList['id']; ?>">削除</a></td>
+                            <td class="contents"><?php echo $incompleteTask['contents']; ?></td>
+                            <td><?php echo $incompleteTask['deadline']; ?></td>
+                            <td><?php echo $incompleteTask['name']; ?></td>
+                            <td><a class="botann1" href="complete/updateStatus.php?id=<?php echo $incompleteTask['id']; ?>">完了</a></td>
+                            <td><a class="botann2" href="edit.php?id=<?php echo $incompleteTask['id']; ?>">編集</a></td>
+                            <td><a class="botann3" href="delete.php?id=<?php echo $incompleteTask['id']; ?>">削除</a></td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
