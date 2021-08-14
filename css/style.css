@@ -140,8 +140,17 @@ font-size: 16px;
 background-color: green;
 }
 #content .main .botann3 {
+width: 70px;
 margin: 0px 0px 0px -80px;
 font-size: 16px;
+padding: 5px;
+text-align: center;
+display: inline-block;
+border-style: solid;
+border-radius: 5px 5px 5px 5px;
+border-width: 1px;
+text-decoration: none;
+color: #FFFFFF;
 background-color: red;
 }
 /* signup.php */

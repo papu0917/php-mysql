@@ -43,7 +43,12 @@ require('getTask.php');
                             <td><?php echo $incompleteTask['name']; ?></td>
                             <td><a class="botann1" href="complete/updateStatus.php?id=<?php echo $incompleteTask['id']; ?>">完了</a></td>
                             <td><a class="botann2" href="edit.php?id=<?php echo $incompleteTask['id']; ?>">編集</a></td>
-                            <td><a class="botann3" href="delete.php?id=<?php echo $incompleteTask['id']; ?>">削除</a></td>
+                            <td>
+                                <form action="delete.php" method="post">
+                                    <input type="submit" class="botann3" name="delete" value="削除" />
+                                    <input type="hidden" name="id" value="<?php echo $incompleteTask['id']; ?>">
+                                </form>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
