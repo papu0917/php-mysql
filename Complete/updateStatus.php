@@ -9,5 +9,5 @@ $stmt->bindValue(':id', $id, PDO::PARAM_STR);
 $stmt->bindValue(':status', $status, PDO::PARAM_STR);
 $res = $stmt->execute();
 
-redirect();
+redirectIndex();
 die;

@@ -163,18 +163,26 @@ background-color: red;
 }
 #signup .index .width {
     width: 223px;
-    margin: 10px;
+    margin: 0px 0px 20px 0px;
     height: 25px;
+}
+#signup .index p {
+    margin-bottom: 20px;
 }
 #signup .index .input {
     width: 223px;
     height: 25px;
-    margin-bottom: 10px;
-    background-color: #4378ed;
-    color: #FFFFFF;
+    margin-bottom: 20px;
+    background-color: #FFFFFF;
+    color: gray;
     border: solid 1px;
 }
 
+#signup .index .input:hover {
+    color: #ffffff;
+    background-color: #4378ed;
+    cursor: pointer;
+}
 .error_list {
     width: 225px;
     margin: 10px auto;
