@@ -1,6 +1,8 @@
 <?php
 ini_set('display_errors', 'on');
-session_start();
+require_once(__DIR__ . '/Session.php');
+$session = Session::getInstance();
+
 require('getTask.php');
 ?>
 <!DOCTYPE html>

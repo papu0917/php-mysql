@@ -1,5 +1,7 @@
 <?php
-session_start();
+
+require_once(__DIR__ . '/Session.php');
+$session = Session::getInstance();
 $errorMessages = $_SESSION['errorMessages'] ?? [];
 $formInputs = $_SESSION['formInputs'] ?? [];
 unset($_SESSION['errorMessages'], $_SESSION['formInputs']);
@@ -8,11 +10,8 @@ require('getTask.php');
 require('Category/getCategories.php');
 
 $taskId = $_GET['id'];
-$pdo  = new PDO('mysql:charset=UTF8;dbname=todolist;host=localhost', 'samplephp', 'samplemysql');
-$stmt = $pdo->prepare("select tasks.id, tasks.contents, tasks.deadline, categories.name from tasks left join categories on tasks.category_id = categories.id where tasks.id = :taskId");
-$stmt->bindValue(':taskId', $taskId, PDO::PARAM_INT);
-$res = $stmt->execute();
-$data = $stmt->fetch(PDO::FETCH_ASSOC);
+$taskDao = new TaskDao();
+$incompleteTasks = $taskDao->edit($taskId);
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,10 +39,10 @@ $data = $stmt->fetch(PDO::FETCH_ASSOC);
                 <form action="update.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $taskId; ?>">
                     <div class="box">
-                        <input class="box-001" type="text" name="contents" value="<?php echo $data['contents']; ?>" />
+                        <input class="box-001" type="text" name="contents" value="<?php echo $incompleteTasks['contents']; ?>" />
                     </div>
                     <div class="box">
-                        <input class="box-002" type="date" name="deadline" value="<?php echo $data['deadline']; ?>" />
+                        <input class="box-002" type="date" name="deadline" value="<?php echo $incompleteTasks['deadline']; ?>" />
                     </div>
                     <div class="box">
                         <select name="category">
