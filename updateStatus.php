@@ -1,15 +1,15 @@
 <?php
 session_start();
 
-require('../redirect.php');
-require_once(__DIR__ . '/../Dao/UserDao.php');
+require('redirect.php');
+require_once(__DIR__ . '/Dao/UserDao.php');
 
 $id = filter_input(INPUT_POST, 'id');
 $user_id = $_SESSION['id'];
 
 $userDao = new UserDao();
 $userId = $userDao->findById($user_id);
-$status = 0;
+$status = 1;
 
 if ($userId['id'] == $user_id) {
     $pdo  = new PDO('mysql:charset=UTF8;dbname=todolist;host=localhost', 'samplephp', 'samplemysql');

@@ -1,7 +1,6 @@
 <?php
 ini_set('display_errors', 'on');
-// session_start();
-require('../Complete/getTask.php');
+require('getTask.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,14 +35,24 @@ require('../Complete/getTask.php');
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($dataLists as $dataList) : ?>
+                    <?php foreach ($incompleteTasks as $incompleteTask) : ?>
                         <tr>
-                            <td class="contents"><?php echo $dataList['contents']; ?></td>
-                            <td><?php echo $dataList['deadline']; ?></td>
-                            <td><?php echo $dataList['name']; ?></td>
-                            <td><a class="botann1" href="edit.php?id=<?php echo $dataList['id']; ?>">未完了</a></td>
-                            <td><a class="botann2" href="edit.php?id=<?php echo $dataList['id']; ?>">編集</a></td>
-                            <td><a class="botann3" href="delete.php?id=<?php echo $dataList['id']; ?>">削除</a></td>
+                            <td class="contents"><?php echo $incompleteTask['contents']; ?></td>
+                            <td><?php echo $incompleteTask['deadline']; ?></td>
+                            <td><?php echo $incompleteTask['name']; ?></td>
+                            <td>
+                                <form action="updateStatus.php" method="post">
+                                    <input type="submit" class="botann1" name="id" value="未完了" />
+                                    <input type="hidden" name="id" value="<?php echo $incompleteTask['id']; ?>">
+                                </form>
+                            </td>
+                            <td><a class="botann2" href="edit.php?id=<?php echo $incompleteTask['id']; ?>">編集</a></td>
+                            <td>
+                                <form action="delete.php" method="post">
+                                    <input type="submit" class="botann3" name="id" value="削除" />
+                                    <input type="hidden" name="id" value="<?php echo $incompleteTask['id']; ?>">
+                                </form>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

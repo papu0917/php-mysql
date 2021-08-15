@@ -5,6 +5,6 @@ $id = $_SESSION['id'];
 $stmt = $pdo->prepare("select tasks.id, tasks.contents, tasks.deadline, categories.name from tasks left join categories on tasks.category_id = categories.id where user_id = :user_id and status = 1");
 $stmt->bindValue(':user_id', $id, PDO::PARAM_INT);
 $res = $stmt->execute();
-$dataLists = $stmt->fetchAll(PDO::FETCH_ASSOC);
-arsort($dataLists);
+$incompleteTasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+arsort($incompleteTasks);
 $pdo = null;
