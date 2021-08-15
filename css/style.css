@@ -132,6 +132,7 @@ margin: 0px 120px 20px 260px;
 }
 #content .main .botann1 {
 width: 70px;
+    margin: 0px 0px 0px 10px;
 padding: 5px;
 text-align: center;
 display: inline-block;
@@ -144,13 +145,46 @@ color: #FFFFFF;
 background-color: #4378ed;
 }
 #content .main .botann2 {
-margin: 0px 0px 0px -70px;
+margin: 0px 0px 0px -60px;
 font-size: 16px;
 background-color: green;
 }
 #content .main .botann3 {
 width: 70px;
-margin: 0px 0px 0px -127px;
+margin: 0px 0px 0px -120px;
+font-size: 16px;
+padding: 5px;
+text-align: center;
+display: inline-block;
+border-style: solid;
+border-radius: 5px 5px 5px 5px;
+border-width: 1px;
+text-decoration: none;
+color: #FFFFFF;
+background-color: red;
+}
+#content .main .botann4 {
+width: 70px;
+    margin: 0px 0px 0px 10px;
+padding: 5px;
+text-align: center;
+display: inline-block;
+border-style: solid;
+border-radius: 5px 5px 5px 5px;
+border-width: 1px;
+font-size: 16px;
+text-decoration: none;
+color: #FFFFFF;
+background-color: #4378ed;
+}
+#content .main .botann5 {
+margin: 0px 0px 0px -50px;
+font-size: 16px;
+background-color: green;
+}
+#content .main .botann6 {
+width: 70px;
+margin: 0px 0px 0px -110px;
 font-size: 16px;
 padding: 5px;
 text-align: center;

@@ -42,15 +42,15 @@ require('getTask.php');
                             <td><?php echo $incompleteTask['deadline']; ?></td>
                             <td><?php echo $incompleteTask['name']; ?></td>
                             <td>
-                                <form action="complete/updateStatus.php" method="post">
-                                    <input type="submit" class="botann1" name="status" value="完了" />
+                                <form action="updateStatus.php" method="post">
+                                    <input type="submit" class="botann1" name="id" value="完了" />
                                     <input type="hidden" name="id" value="<?php echo $incompleteTask['id']; ?>">
                                 </form>
                             </td>
                             <td><a class="botann2" href="edit.php?id=<?php echo $incompleteTask['id']; ?>">編集</a></td>
                             <td>
                                 <form action="delete.php" method="post">
-                                    <input type="submit" class="botann3" name="delete" value="削除" />
+                                    <input type="submit" class="botann3" name="id" value="削除" />
                                     <input type="hidden" name="id" value="<?php echo $incompleteTask['id']; ?>">
                                 </form>
                             </td>
