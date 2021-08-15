@@ -1,7 +1,8 @@
 <?php
 
 require('../redirect.php');
-$id = $_GET['id'];
+
+$id = filter_input(INPUT_POST, 'id');
 $status = 1;
 $pdo  = new PDO('mysql:charset=UTF8;dbname=todolist;host=localhost', 'samplephp', 'samplemysql');
 $stmt = $pdo->prepare("update tasks set status = :status where tasks.id = :id");

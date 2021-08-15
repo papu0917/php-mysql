@@ -41,7 +41,12 @@ require('getTask.php');
                             <td class="contents"><?php echo $incompleteTask['contents']; ?></td>
                             <td><?php echo $incompleteTask['deadline']; ?></td>
                             <td><?php echo $incompleteTask['name']; ?></td>
-                            <td><a class="botann1" href="complete/updateStatus.php?id=<?php echo $incompleteTask['id']; ?>">完了</a></td>
+                            <td>
+                                <form action="complete/updateStatus.php" method="post">
+                                    <input type="submit" class="botann1" name="status" value="完了" />
+                                    <input type="hidden" name="id" value="<?php echo $incompleteTask['id']; ?>">
+                                </form>
+                            </td>
                             <td><a class="botann2" href="edit.php?id=<?php echo $incompleteTask['id']; ?>">編集</a></td>
                             <td>
                                 <form action="delete.php" method="post">
