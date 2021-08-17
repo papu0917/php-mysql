@@ -20,7 +20,7 @@ require('getTask.php');
                 <div class="complete-button"><a class="complete" href="">完了</a></div>
             </div>
             <div class="task-search">
-                <form action="user_list.php" method="post">
+                <form action="../searchTask.php" method="post">
                     <input type="text" class="form" placeholder="キーワードを入力" name="">
                     <input type="submit" class="button" value="検索">
                 </form>
