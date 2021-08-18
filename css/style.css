@@ -33,7 +33,7 @@ body {
     width: 900px;
     margin: 60px auto;
 }
-#content .main a {
+#content .main .box a {
     width: 70px;
     padding: 5px;
     text-align: center;
@@ -131,6 +131,9 @@ display: flex;
 #content .main .title-list .deadline {
 margin: 0px 120px 20px 260px;
 }
+#content .main .table .botann {
+width: 100%;
+}
 #content .main .botann1 {
 width: 70px;
     margin: 0px 0px 0px 10px;
@@ -148,6 +151,15 @@ background-color: #4378ed;
 #content .main .botann2 {
 margin: 0px 0px 0px -55px;
 font-size: 16px;
+width: 70px;
+padding: 5px;
+text-align: center;
+display: inline-block;
+border-style: solid;
+border-radius: 5px 5px 5px 5px;
+border-width: 1px;
+text-decoration: none;
+color: #FFFFFF;
 background-color: green;
 }
 #content .main .botann3 {
