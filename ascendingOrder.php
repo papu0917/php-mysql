@@ -5,7 +5,7 @@ require_once(__DIR__ . '/Session.php');
 $session = Session::getInstance();
 $userId = $_SESSION['id'];
 $taskDao = new TaskDao();
-$deadLineDescs = $taskDao->findByDeadLineDesc($userId);
+$deadLineDescs = $taskDao->findByDeadLineAsc($userId);
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,7 +38,7 @@ $deadLineDescs = $taskDao->findByDeadLineDesc($userId);
                         <th class="dead-line">締め切り</th>
                         <th>カテゴリー</th>
                         <th><a class="botann" href="ascendingOrder.php">締切昇順</a></th>
-                        <th><a class="botann" href="/">締切降順</a></th>
+                        <th><a class="botann" href="descendingOrder.php">締切降順</a></th>
                     </tr>
                 </thead>
                 <tbody>
