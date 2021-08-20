@@ -42,6 +42,15 @@ final class TaskDao extends Dao
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function findByCategoryName(int $userId, $name)
+    {
+        $stmt = $this->pdo->prepare("SELECT tasks.id, tasks.contents, tasks.deadline, categories.name from tasks left join categories on tasks.category_id = categories.id where user_id = :user_id and status = 0 and categories.name = '$name'");
+        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+        // $stmt->bindValue(':category', $name, PDO::PARAM_INT);
+        $res = $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function findByTasks(int $userId, $contents)
     {
         $stmt = $this->pdo->prepare("select tasks.id, tasks.contents, tasks.deadline, categories.name from tasks left join categories on tasks.category_id = categories.id where contents Like '%$contents%' and user_id = :user_id and status = 0");

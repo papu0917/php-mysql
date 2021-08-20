@@ -46,9 +46,9 @@ require('getTask.php');
                                     <input type="hidden" name="id" value="<?php echo $incompleteTask['id']; ?>">
                                 </form>
                             </td>
-                            <td><a class="botann2" href="edit.php?id=<?php echo $incompleteTask['id']; ?>">編集</a></td>
+                            <td><a class="botann2" href="../edit.php?id=<?php echo $incompleteTask['id']; ?>">編集</a></td>
                             <td>
-                                <form action="delete.php" method="post">
+                                <form action="../delete.php" method="post">
                                     <input type="submit" class="botann3" name="id" value="削除" />
                                     <input type="hidden" name="id" value="<?php echo $incompleteTask['id']; ?>">
                                 </form>

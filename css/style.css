@@ -131,8 +131,10 @@ display: flex;
 #content .main .title-list .deadline {
 margin: 0px 120px 20px 260px;
 }
-#content .main .table .botann {
+#content .main .table .botann:hover {
 width: 100%;
+color: #4378ed;
+text-decoration: none;
 }
 #content .main .botann1 {
 width: 70px;
