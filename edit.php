@@ -1,5 +1,4 @@
 <?php
-
 require_once(__DIR__ . '/Session.php');
 $session = Session::getInstance();
 $errorMessages = $_SESSION['errorMessages'] ?? [];

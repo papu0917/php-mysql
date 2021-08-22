@@ -16,6 +16,7 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
     public function findById(TaskId $id): Task
     {
         $taskMapper = $this->taskDao->findById($id->value());
+
         $taskId = new TaskId($taskMapper['id']);
         return new Task(
             $taskId,
