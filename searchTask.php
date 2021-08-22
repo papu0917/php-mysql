@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/Dao/TaskDao.php');
+require_once(__DIR__ . '/Infrastructure/Dao/TaskDao.php');
 require_once(__DIR__ . '/Session.php');
 require_once(__DIR__ . '/redirect.php');
 

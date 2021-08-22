@@ -8,10 +8,13 @@ unset($_SESSION['errorMessages'], $_SESSION['formInputs']);
 
 require('getTask.php');
 require('Category/getCategories.php');
+require_once __DIR__ . '/Domain/ValueObject/TaskId.php';
+require_once __DIR__ . '/Interfaces/Repository/TaskMySqlRepository.php';
 
-$taskId = $_GET['id'];
-$taskDao = new TaskDao();
-$incompleteTasks = $taskDao->edit($taskId);
+$id = $_GET['id'];
+$taskId = new TaskId($id);
+$taskRepositroy = new TaskMySqlRepository();
+$task = $taskRepositroy->findById($taskId);
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,12 +40,12 @@ $incompleteTasks = $taskDao->edit($taskId);
                 <?php endif; ?>
 
                 <form action="update.php" method="post">
-                    <input type="hidden" name="id" value="<?php echo $taskId; ?>">
+                    <input type="hidden" name="id" value="<?php echo $taskId->value(); ?>">
                     <div class="box">
-                        <input class="box-001" type="text" name="contents" value="<?php echo $incompleteTasks['contents']; ?>" />
+                        <input class="box-001" type="text" name="contents" value="<?php echo $task->contents(); ?>" />
                     </div>
                     <div class="box">
-                        <input class="box-002" type="date" name="deadline" value="<?php echo $incompleteTasks['deadline']; ?>" />
+                        <input class="box-002" type="date" name="deadline" value="<?php echo $task->deadline()->format('Y-m-d'); ?>" />
                     </div>
                     <div class="box">
                         <select name="category">

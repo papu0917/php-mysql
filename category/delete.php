@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once(__DIR__ . '/../Dao/CategoryDao.php');
-require_once(__DIR__ . '/../Dao/UserDao.php');
+require_once(__DIR__ . '/../Infrastructure/Dao/CategoryDao.php');
+require_once(__DIR__ . '/../Infrastructure/Dao/UserDao.php');
 
 $id = filter_input(INPUT_POST, 'id');
 $user_id = $_SESSION['id'];

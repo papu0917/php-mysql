@@ -2,8 +2,8 @@
 session_start();
 
 require('redirect.php');
-require_once(__DIR__ . '/Dao/UserDao.php');
-require_once(__DIR__ . '/Dao/TaskDao.php');
+require_once(__DIR__ . '/Infrastructure/Dao/UserDao.php');
+require_once(__DIR__ . '/Infrastructure/Dao/TaskDao.php');
 
 $id = filter_input(INPUT_POST, 'id');
 $user_id = $_SESSION['id'];

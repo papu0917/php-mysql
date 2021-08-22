@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/Dao/TaskDao.php');
+require_once(__DIR__ . '/Infrastructure/Dao/TaskDao.php');
 $userId = $_SESSION['id'];
 if (!$userId) {
     header('Location: /signin.php');
@@ -7,5 +7,5 @@ if (!$userId) {
 }
 
 $taskDao = new TaskDao();
-$incompleteTasks = $taskDao->findByAll($userId);
+$incompleteTasks = $taskDao->findAllByUserId($userId);
 arsort($incompleteTasks);

@@ -2,7 +2,7 @@
 require_once(__DIR__ . '/Session.php');
 $session = Session::getInstance();
 date_default_timezone_set('Asia/Tokyo');
-require_once(__DIR__ . '/Dao/TaskDao.php');
+require_once(__DIR__ . '/Infrastructure/Dao/TaskDao.php');
 require('redirect.php');
 
 $id = $_POST['id'];
