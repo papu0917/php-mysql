@@ -1,6 +1,6 @@
 <?php
 require('../redirect.php');
-require_once(__DIR__ . '/../Dao/CategoryDao.php');
+require_once(__DIR__ . '/../Infrastructure/Dao/CategoryDao.php');
 
 $id = $_POST['category_id'];
 $name = filter_input(INPUT_POST, 'category_name');

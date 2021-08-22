@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . '/Session.php');
-require_once(__DIR__ . '/Dao/UserDao.php');
+require_once(__DIR__ . '/Infrastructure/Dao/UserDao.php');
 require_once(__DIR__ . '/ViewModel/SignInViewModel.php');
 
 $email = filter_input(INPUT_POST, 'email');

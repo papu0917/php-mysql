@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once(__DIR__ . '/../Dao/CategoryDao.php');
+require_once(__DIR__ . '/../Infrastructure/Dao/CategoryDao.php');
 require('getCategories.php');
 
 $category_id = $_GET['id'];

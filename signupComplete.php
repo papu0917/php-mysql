@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once(__DIR__ . '/Dao/UserDao.php');
+require_once(__DIR__ . '/Infrastructure/Dao/UserDao.php');
 date_default_timezone_set('Asia/Tokyo');
 
 // (1) 登録するデータを用意

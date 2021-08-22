@@ -1,23 +1,20 @@
 <?php
-session_start();
+require_once(__DIR__ . '/Session.php');
+$session = Session::getInstance();
+date_default_timezone_set('Asia/Tokyo');
+require_once(__DIR__ . '/Infrastructure/Dao/TaskDao.php');
 require('redirect.php');
 
 $id = $_POST['id'];
-// var_dump($id);
-// die;
+
 $contents = filter_input(INPUT_POST, 'contents');
 $deadline = filter_input(INPUT_POST, 'deadline');
 $category_id = filter_input(INPUT_POST, 'category');
-var_dump($id);
-var_dump($contents);
-var_dump($deadline);
-var_dump($category_id);
-// die;
 
 function formChecker($contents, $deadline)
 {
     $form = [];
-    if (!$contents) $form[] = "タスクを入力してくださ";
+    if (!$contents) $form[] = "タスクを入力してください";
     if (!$deadline) $form[] = "日付を入力してください";
     return $form;
 }
@@ -33,12 +30,6 @@ if (count($errorMessages) != 0) {
     die;
 }
 
-$pdo  = new PDO('mysql:charset=UTF8;dbname=todolist;host=localhost', 'samplephp', 'samplemysql');
-$stmt = $pdo->prepare("update tasks left join categories on tasks.category_id = categories.id set contents = :contents, deadline = :deadline, category_id = :category_id where tasks.id = :id");
-$stmt->bindValue(':id', $id, PDO::PARAM_STR);
-$stmt->bindValue(':contents', $contents, PDO::PARAM_STR);
-$stmt->bindValue(':category_id', $category_id, PDO::PARAM_STR);
-$stmt->bindValue(':deadline', $deadline, PDO::PARAM_STR);
-$res = $stmt->execute();
-
+$taskDao = new TaskDao();
+$taskDao->update($id, $contents, $deadline, $category_id);
 redirectIndex();

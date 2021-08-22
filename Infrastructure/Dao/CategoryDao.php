@@ -9,7 +9,7 @@ final class CategoryDao extends Dao
         parent::__construct();
     }
 
-    public function findByAll(): array
+    public function findAll(): array
     {
         $sql = "SELECT * from categories";
         $stmt = $this->pdo->prepare($sql);
