@@ -21,7 +21,7 @@ require('getTask.php');
             </div>
             <div class="task-search">
                 <form action="../searchTask.php" method="post">
-                    <input type="text" class="form" placeholder="キーワードを入力" name="">
+                    <input type="text" class="form" placeholder="キーワードを入力" name="searchWord">
                     <input type="submit" class="button" value="検索">
                 </form>
             </div>
