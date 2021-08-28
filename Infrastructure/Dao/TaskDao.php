@@ -11,7 +11,7 @@ final class TaskDao extends Dao
     public function insert(
         int $userId,
         string $contents,
-        string $deadline,
+        DateTime $deadline,
         int $category_id
     ) {
         $sql = <<<EOF
@@ -26,7 +26,7 @@ EOF;
         $stmt->bindValue(':user_id', $userId, PDO::PARAM_STR);
         $stmt->bindValue(':contents', $contents, PDO::PARAM_STR);
         $stmt->bindValue(':category_id', $category_id, PDO::PARAM_STR);
-        $stmt->bindValue(':deadline', $deadline, PDO::PARAM_STR);
+        $stmt->bindValue(':deadline', $deadline->format('Y-m-d'), PDO::PARAM_STR);
         return $stmt->execute();
     }
 
@@ -76,6 +76,7 @@ EOF;
         $sql = <<<EOF
         select 
             tasks.id, 
+            tasks.user_id,
             tasks.contents, 
             tasks.deadline, 
             categories.name as categoryName
