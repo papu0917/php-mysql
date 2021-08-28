@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../Infrastructure/Dao/TaskDao.php';
 require_once __DIR__ . '/../../Domain/ValueObject/TaskId.php';
+require_once __DIR__ . '/../../Domain/ValueObject/TaskContents.php';
 require_once __DIR__ . '/../../Domain/ValueObject/UserId.php';
 
 
@@ -16,7 +17,7 @@ final class Task
     public function __construct(
         ?TaskId $id,
         UserId $userId,
-        string $contents,
+        TaskContents $contents,
         DateTime $deadline,
         string $categoryName
     ) {
@@ -37,7 +38,7 @@ final class Task
         return $this->userId;
     }
 
-    public function contents(): string
+    public function contents(): TaskContents
     {
         return $this->contents;
     }

@@ -35,7 +35,7 @@ if (count($errorMessages) != 0) {
 $newTask = new Task(
     null,
     new UserId($userId),
-    $contents,
+    new TaskContents($contents),
     new DateTime($deadline),
     $category_id
 );
