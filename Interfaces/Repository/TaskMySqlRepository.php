@@ -25,7 +25,7 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
         return new Task(
             new TaskId($taskMapper['id']),
             new UserId($taskMapper['user_id']),
-            $taskMapper['contents'],
+            new TaskContents($taskMapper['contents']),
             new DateTime($taskMapper['deadline']),
             $taskMapper['categoryName']
         );
@@ -37,7 +37,7 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
 
         $this->taskDao->insert(
             $task->userId()->value(),
-            $task->contents(),
+            $task->contents()->value(),
             $task->deadline(),
             $category['id']
         );
