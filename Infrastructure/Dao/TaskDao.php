@@ -56,9 +56,27 @@ EOF;
 
     public function findByCategoryName(int $userId, string $name): array
     {
-        $stmt = $this->pdo->prepare("SELECT tasks.id, tasks.contents, tasks.deadline, categories.name from tasks left join categories on tasks.category_id = categories.id where user_id = :user_id and status = 0 and categories.name = '$name'");
+        $sql = <<<EOF
+        SELECT 
+            tasks.id, 
+            tasks.contents, 
+            tasks.deadline, 
+            categories.name 
+        from 
+            tasks 
+        left join 
+            categories 
+        on 
+            tasks.category_id = categories.id 
+        where 
+            user_id = :user_id 
+        and 
+            status = 0 
+        and 
+            categories.name = '$name'
+EOF;
+        $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
-        // $stmt->bindValue(':category', $name, PDO::PARAM_INT);
         $res = $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

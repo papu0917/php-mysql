@@ -9,9 +9,6 @@ require_once __DIR__ . '/Domain/ValueObject/TaskId.php';
 require_once __DIR__ . '/Domain/ValueObject/TaskContents.php';
 require_once __DIR__ . '/Domain/ValueObject/TaskDeadline.php';
 
-
-
-
 require('redirect.php');
 
 $userId = $_POST['id'];
