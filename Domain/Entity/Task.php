@@ -22,7 +22,7 @@ final class Task
         UserId $userId,
         TaskContents $contents,
         DateTime $deadline,
-        string $categoryName
+        ?string $categoryName
     ) {
         $this->id = $id;
         $this->userId = $userId;

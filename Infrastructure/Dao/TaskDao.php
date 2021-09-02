@@ -98,13 +98,13 @@ EOF;
     public function update(
         int $id,
         string $contents,
-        string $deadline,
+        DateTime $deadline,
         int $category_id
     ): bool {
         $stmt = $this->pdo->prepare("update tasks left join categories on tasks.category_id = categories.id set contents = :contents, deadline = :deadline, category_id = :category_id where tasks.id = :id");
         $stmt->bindValue(':id', $id, PDO::PARAM_STR);
         $stmt->bindValue(':contents', $contents, PDO::PARAM_STR);
-        $stmt->bindValue(':deadline', $deadline, PDO::PARAM_STR);
+        $stmt->bindValue(':deadline', $deadline->format('Y-m-d'), PDO::PARAM_STR);
         $stmt->bindValue(':category_id', $category_id, PDO::PARAM_STR);
         return $stmt->execute();
     }

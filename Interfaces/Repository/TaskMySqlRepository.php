@@ -19,8 +19,6 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
     public function findById(TaskId $id): Task
     {
         $taskMapper = $this->taskDao->findById($id->value());
-        // var_dump($taskMapper);
-        // die;
 
         return new Task(
             new TaskId($taskMapper['id']),
@@ -36,6 +34,18 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
         $category = $this->categoryDao->findById($task->categoryName());
 
         $this->taskDao->insert(
+            $task->userId()->value(),
+            $task->contents()->value(),
+            $task->deadline(),
+            $category['id']
+        );
+    }
+
+    public function update(Task $task)
+    {
+        $category = $this->categoryDao->findById($task->categoryName());
+
+        $this->taskDao->update(
             $task->userId()->value(),
             $task->contents()->value(),
             $task->deadline(),
