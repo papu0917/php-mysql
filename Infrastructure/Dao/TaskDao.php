@@ -119,7 +119,23 @@ EOF;
         DateTime $deadline,
         int $category_id
     ): bool {
-        $stmt = $this->pdo->prepare("update tasks left join categories on tasks.category_id = categories.id set contents = :contents, deadline = :deadline, category_id = :category_id where tasks.id = :id");
+
+        $sql = <<<EOF
+        update 
+            tasks 
+        left join 
+            categories 
+        on 
+            tasks.category_id = categories.id 
+        set 
+            contents = :contents, 
+            deadline = :deadline, 
+            category_id = :category_id 
+        where 
+            tasks.id = :id        
+EOF;
+
+        $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_STR);
         $stmt->bindValue(':contents', $contents, PDO::PARAM_STR);
         $stmt->bindValue(':deadline', $deadline->format('Y-m-d'), PDO::PARAM_STR);
