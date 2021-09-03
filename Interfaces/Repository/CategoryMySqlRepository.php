@@ -36,4 +36,9 @@ final class CategoryMySqlRepository
             $category->name()->value()
         );
     }
+
+    public function delete(CategoryId $id)
+    {
+        $this->categoryDao->delete($id->value());
+    }
 }
