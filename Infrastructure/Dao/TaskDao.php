@@ -11,7 +11,7 @@ final class TaskDao extends Dao
     public function insert(
         int $userId,
         string $contents,
-        string $deadline,
+        DateTime $deadline,
         int $category_id
     ) {
         $sql = <<<EOF
@@ -26,7 +26,7 @@ EOF;
         $stmt->bindValue(':user_id', $userId, PDO::PARAM_STR);
         $stmt->bindValue(':contents', $contents, PDO::PARAM_STR);
         $stmt->bindValue(':category_id', $category_id, PDO::PARAM_STR);
-        $stmt->bindValue(':deadline', $deadline, PDO::PARAM_STR);
+        $stmt->bindValue(':deadline', $deadline->format('Y-m-d'), PDO::PARAM_STR);
         return $stmt->execute();
     }
 
@@ -56,9 +56,27 @@ EOF;
 
     public function findByCategoryName(int $userId, string $name): array
     {
-        $stmt = $this->pdo->prepare("SELECT tasks.id, tasks.contents, tasks.deadline, categories.name from tasks left join categories on tasks.category_id = categories.id where user_id = :user_id and status = 0 and categories.name = '$name'");
+        $sql = <<<EOF
+        SELECT 
+            tasks.id, 
+            tasks.contents, 
+            tasks.deadline, 
+            categories.name 
+        from 
+            tasks 
+        left join 
+            categories 
+        on 
+            tasks.category_id = categories.id 
+        where 
+            user_id = :user_id 
+        and 
+            status = 0 
+        and 
+            categories.name = '$name'
+EOF;
+        $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
-        // $stmt->bindValue(':category', $name, PDO::PARAM_INT);
         $res = $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -76,6 +94,7 @@ EOF;
         $sql = <<<EOF
         select 
             tasks.id, 
+            tasks.user_id,
             tasks.contents, 
             tasks.deadline, 
             categories.name as categoryName
@@ -97,13 +116,29 @@ EOF;
     public function update(
         int $id,
         string $contents,
-        string $deadline,
+        DateTime $deadline,
         int $category_id
     ): bool {
-        $stmt = $this->pdo->prepare("update tasks left join categories on tasks.category_id = categories.id set contents = :contents, deadline = :deadline, category_id = :category_id where tasks.id = :id");
+
+        $sql = <<<EOF
+        update 
+            tasks 
+        left join 
+            categories 
+        on 
+            tasks.category_id = categories.id 
+        set 
+            contents = :contents, 
+            deadline = :deadline, 
+            category_id = :category_id 
+        where 
+            tasks.id = :id        
+EOF;
+
+        $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_STR);
         $stmt->bindValue(':contents', $contents, PDO::PARAM_STR);
-        $stmt->bindValue(':deadline', $deadline, PDO::PARAM_STR);
+        $stmt->bindValue(':deadline', $deadline->format('Y-m-d'), PDO::PARAM_STR);
         $stmt->bindValue(':category_id', $category_id, PDO::PARAM_STR);
         return $stmt->execute();
     }

@@ -17,12 +17,23 @@ final class CategoryDao extends Dao
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function findById($id)
+    public function findById(int $id): ?array
     {
-        $stmt = $this->pdo->prepare("select * from categories where categories.id = :category_id");
+        $stmt = $this->pdo->prepare("select * from categories where id = :category_id");
         $stmt->bindValue(':category_id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $category = $stmt->fetch(PDO::FETCH_ASSOC);
+        return ($category === false) ? null : $category;
+    }
+
+    public function findByName(string $name): ?array
+    {
+        $stmt = $this->pdo->prepare("select * from categories where name = :name");
+        $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+        $stmt->execute();
+        $category = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return ($category === false) ? null : $category;
     }
 
     public function insert(string $name): string
@@ -35,7 +46,7 @@ final class CategoryDao extends Dao
 
     public function update(int $id, string $name): string
     {
-        $stmt = $this->pdo->prepare("UPDATE categories SET name = :name where categories.id = :id");
+        $stmt = $this->pdo->prepare("UPDATE categories SET name = :name where id = :id");
         $stmt->bindValue(':id', $id, PDO::PARAM_STR);
         $stmt->bindValue(':name', $name, PDO::PARAM_STR);
         return $stmt->execute();

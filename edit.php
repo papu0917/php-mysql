@@ -41,7 +41,7 @@ $task = $taskRepositroy->findById($taskId);
                 <form action="update.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $taskId->value(); ?>">
                     <div class="box">
-                        <input class="box-001" type="text" name="contents" value="<?php echo $task->contents(); ?>" />
+                        <input class="box-001" type="text" name="contents" value="<?php echo $task->contents()->value(); ?>" />
                     </div>
                     <div class="box">
                         <input class="box-002" type="date" name="deadline" value="<?php echo $task->deadline()->format('Y-m-d'); ?>" />

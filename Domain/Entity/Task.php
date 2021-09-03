@@ -1,10 +1,17 @@
 <?php
 require_once __DIR__ . '/../../Infrastructure/Dao/TaskDao.php';
+require_once __DIR__ . '/../../Infrastructure/Dao/CategoryDao.php';
 require_once __DIR__ . '/../../Domain/ValueObject/TaskId.php';
+require_once __DIR__ . '/../../Domain/ValueObject/TaskContents.php';
+require_once __DIR__ . '/../../Domain/ValueObject/UserId.php';
+require_once __DIR__ . '/../../Domain/ValueObject/CategoryId.php';
+require_once __DIR__ . '/../../Domain/ValueObject/CategoryName.php';
+
 
 final class Task
 {
     private $id;
+    private $userId;
     private $contents;
     private $deadline;
     // TODO: カテゴリーエンティティにする
@@ -12,11 +19,13 @@ final class Task
 
     public function __construct(
         ?TaskId $id,
-        string $contents,
+        UserId $userId,
+        TaskContents $contents,
         DateTime $deadline,
-        string $categoryName
+        ?string $categoryName
     ) {
         $this->id = $id;
+        $this->userId = $userId;
         $this->contents = $contents;
         $this->deadline = $deadline;
         $this->categoryName = $categoryName;
@@ -27,7 +36,12 @@ final class Task
         return $this->id;
     }
 
-    public function contents(): string
+    public function userId(): UserId
+    {
+        return $this->userId;
+    }
+
+    public function contents(): TaskContents
     {
         return $this->contents;
     }

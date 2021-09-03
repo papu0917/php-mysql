@@ -1,11 +1,12 @@
 <?php
 session_start();
-require_once(__DIR__ . '/../Infrastructure/Dao/CategoryDao.php');
-require('getCategories.php');
+require_once __DIR__ . '/..//Domain/ValueObject/CategoryId.php';
+require_once __DIR__ . '/../Interfaces/Repository/CategoryMySqlRepository.php';
 
-$category_id = $_GET['id'];
-$categoryDao = new CategoryDao();
-$category = $categoryDao->findById($category_id);
+$id = $_GET['id'];
+$categoryId = new CategoryId($id);
+$categoryRepositroy = new CategoryMySqlRepository();
+$category = $categoryRepositroy->findById($categoryId);
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,9 +23,9 @@ $category = $categoryDao->findById($category_id);
             <?php require('../header.php'); ?>
             <div class="index">
                 <form action="update.php" method="post">
-                    <input type="hidden" name="category_id" value="<?php echo $category_id; ?>">
+                    <input type="hidden" name="category_id" value="<?php echo $categoryId->value(); ?>">
                     <div class="box">
-                        <input class="box-001" type="text" name="category_name" value="<?php echo $category['name']; ?>" />
+                        <input class="box-001" type="text" name="category_name" value="<?php echo $category->name()->value(); ?>" />
                     </div>
                     <input class="input" type="submit" value="更新" />
                 </form>
