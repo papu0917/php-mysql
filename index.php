@@ -4,11 +4,6 @@ require_once(__DIR__ . '/Session.php');
 $session = Session::getInstance();
 
 require('getTask.php');
-require_once __DIR__ . '/Interfaces/Repository/TaskMySqlRepository.php';
-// $id = $_SESSION['id'];
-// $taskId = new TaskId($id);
-// $taskRepositroy = new TaskMySqlRepository();
-// $incompleteTasks = $taskRepositroy->findById($taskId)
 ?>
 <!DOCTYPE html>
 <html>

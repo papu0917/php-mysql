@@ -46,8 +46,4 @@ $newTask = new Task(
 
 $taskRepositroy = new TaskMySqlRepository();
 $taskRepositroy->update($newTask);
-
-
-// $taskDao = new TaskDao();
-// $taskDao->update($id, $contents, $deadline, $category_id);
 redirectIndex();

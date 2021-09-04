@@ -55,7 +55,7 @@ final class CategoryDao extends Dao
     public function delete(int $id)
     {
         $sql = <<<EOF
-        DELETE FROM 
+        DELETE FROM
             categories 
         WHERE 
             id = :id 

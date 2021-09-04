@@ -31,7 +31,6 @@ if (count($errorMessages) != 0) {
     die;
 }
 
-
 $newTask = new Task(
     null,
     new UserId($userId),
@@ -42,8 +41,5 @@ $newTask = new Task(
 
 $taskRepositroy = new TaskMySqlRepository();
 $taskRepositroy->insert($newTask);
-
-// $taskDao = new TaskDao();
-// $taskDao->insert($id, $contents, $deadline, $category_id);
 header('Location: /index.php');
 die;
