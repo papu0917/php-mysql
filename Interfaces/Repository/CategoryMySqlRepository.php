@@ -2,8 +2,6 @@
 
 require_once __DIR__ . '/../../Infrastructure/Dao/CategoryDao.php';
 require_once __DIR__ . '/../../Domain/Entity/Category.php';
-require_once __DIR__ . '/../../Domain/ValueObject/CategoryId.php';
-require_once __DIR__ . '/../../Domain/ValueObject/CategoryName.php';
 
 final class CategoryMySqlRepository
 {

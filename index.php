@@ -3,7 +3,14 @@ ini_set('display_errors', 'on');
 require_once(__DIR__ . '/Session.php');
 $session = Session::getInstance();
 
-require('getTask.php');
+// require('getTask.php');
+require_once __DIR__ . '/Interfaces/Repository/TaskMySqlRepository.php';
+require_once __DIR__ . '/Domain/ValueObject/UserId.php';
+
+$userId = $_SESSION['id'];
+$taskId = new UserId($userId);
+$taskRepositroy = new TaskMySqlRepository();
+$incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
 ?>
 <!DOCTYPE html>
 <html>

@@ -21,18 +21,23 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
     {
         $taskMapper = $this->taskDao->findById($id->value());
 
+        $category = new Category(
+            new CategoryId($taskMapper['categoryId']),
+            new CategoryName($taskMapper['categoryName'])
+        );
+
         return new Task(
             new TaskId($taskMapper['id']),
             new UserId($taskMapper['user_id']),
             new TaskContents($taskMapper['contents']),
             new DateTime($taskMapper['deadline']),
-            $taskMapper['categoryName']
+            $category
         );
     }
 
     public function insert(Task $task)
     {
-        $category = $this->categoryDao->findById($task->categoryName());
+        $category = $this->categoryDao->findById($task->categoryId());
 
         $this->taskDao->insert(
             $task->userId()->value(),
@@ -44,7 +49,7 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
 
     public function update(Task $task)
     {
-        $category = $this->categoryDao->findById($task->categoryName());
+        $category = $this->categoryDao->findById($task->categoryId());
 
         $this->taskDao->update(
             $task->userId()->value(),
@@ -59,17 +64,18 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
         $this->taskDao->delete($id->value());
     }
 
-    public function findAllByUserId(TaskId $userId)
+    public function findAllByUserId(UserId $userId)
     {
-        $taskMapper = $this->taskDao->findAllByUserId($userId->value());
-        // var_dump($taskMapper);
+        $taskMappers = $this->taskDao->findAllByUserId($userId->value());
+        var_dump($taskMappers);
+        die;
 
         // return new Task(
-        //     new TaskId($taskMapper['id']),
-        //     new UserId($taskMapper['user_id']),
-        //     new TaskContents($taskMapper['contents']),
-        //     new DateTime($taskMapper['deadline']),
-        //     $taskMapper['categoryName']
+        //     new TaskId($taskMappers['id']),
+        //     new UserId($taskMappers['user_id']),
+        //     new TaskContents($taskMappers['contents']),
+        //     new DateTime($taskMappers['deadline']),
+        //     $taskMappers['categoryName']
         // );
     }
 }

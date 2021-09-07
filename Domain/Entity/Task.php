@@ -5,7 +5,8 @@ require_once __DIR__ . '/../../Domain/ValueObject/TaskId.php';
 require_once __DIR__ . '/../../Domain/ValueObject/TaskContents.php';
 require_once __DIR__ . '/../../Domain/ValueObject/UserId.php';
 require_once __DIR__ . '/../../Domain/ValueObject/CategoryId.php';
-require_once __DIR__ . '/../../Domain/ValueObject/CategoryName.php';
+require_once __DIR__ . '/../../Domain/Entity/Category.php';
+
 
 
 final class Task
@@ -14,21 +15,20 @@ final class Task
     private $userId;
     private $contents;
     private $deadline;
-    // TODO: カテゴリーエンティティにする
-    private $categoryName;
+    private $category;
 
     public function __construct(
         ?TaskId $id,
         UserId $userId,
         TaskContents $contents,
         DateTime $deadline,
-        ?string $categoryName
+        ?Category $category
     ) {
         $this->id = $id;
         $this->userId = $userId;
         $this->contents = $contents;
         $this->deadline = $deadline;
-        $this->categoryName = $categoryName;
+        $this->category = $category;
     }
 
     public function id(): ?TaskId
@@ -51,8 +51,24 @@ final class Task
         return $this->deadline;
     }
 
+    public function category(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function categoryId(): int
+    {
+        return $this->category->id()->value();
+    }
+
     public function categoryName(): string
     {
-        return $this->categoryName;
+        return $this->category->name()->value();
+    }
+
+    public function isOverDeadline(): bool
+    {
+        $now = new DateTime();
+        return ($this->deadline < $now);
     }
 }

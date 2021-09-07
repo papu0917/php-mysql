@@ -97,6 +97,7 @@ EOF;
             tasks.user_id,
             tasks.contents, 
             tasks.deadline, 
+            categories.id as categoryId,
             categories.name as categoryName
         from 
             tasks 
