@@ -5,6 +5,7 @@ date_default_timezone_set('Asia/Tokyo');
 require_once(__DIR__ . '/Infrastructure/Dao/TaskDao.php');
 
 require_once __DIR__ . '/Interfaces/Repository/TaskMySqlRepository.php';
+require_once __DIR__ . '/Interfaces/Repository/CategoryMySqlRepository.php';
 require_once __DIR__ . '/Domain/ValueObject/TaskId.php';
 require_once __DIR__ . '/Domain/ValueObject/TaskContents.php';
 require_once __DIR__ . '/Domain/ValueObject/TaskDeadline.php';
@@ -36,18 +37,18 @@ if (count($errorMessages) != 0) {
     die;
 }
 
+
+$categoryRepositroy = new CategoryMySqlRepository();
+$category = $categoryRepositroy->findById(new CategoryId($category_id));
+
 $newTask = new Task(
     null,
     new UserId($userId),
     new TaskContents($contents),
     new DateTime($deadline),
-    $category_id
+    $category
 );
 
 $taskRepositroy = new TaskMySqlRepository();
 $taskRepositroy->update($newTask);
-
-
-// $taskDao = new TaskDao();
-// $taskDao->update($id, $contents, $deadline, $category_id);
 redirectIndex();

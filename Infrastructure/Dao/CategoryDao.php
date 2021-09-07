@@ -54,8 +54,13 @@ final class CategoryDao extends Dao
 
     public function delete(int $id)
     {
-        $pdo  = new PDO('mysql:charset=UTF8;dbname=todolist;host=localhost', 'samplephp', 'samplemysql');
-        $stmt = $this->pdo->prepare('DELETE FROM categories WHERE id = :id');
+        $sql = <<<EOF
+        DELETE FROM
+            categories 
+        WHERE 
+            id = :id 
+EOF;
+        $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_STR);
         return $stmt->execute();
     }
