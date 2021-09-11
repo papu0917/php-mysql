@@ -19,7 +19,7 @@ final class Task
 
     public function __construct(
         ?TaskId $id,
-        UserId $userId,
+        ?UserId $userId,
         TaskContents $contents,
         DateTime $deadline,
         ?Category $category
@@ -36,7 +36,7 @@ final class Task
         return $this->id;
     }
 
-    public function userId(): UserId
+    public function userId(): ?UserId
     {
         return $this->userId;
     }

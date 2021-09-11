@@ -32,7 +32,24 @@ EOF;
 
     public function findAllByUserId(int $userId): array
     {
-        $stmt = $this->pdo->prepare("SELECT tasks.id, tasks.contents, tasks.deadline, categories.name from tasks left join categories on tasks.category_id = categories.id where user_id = :user_id and status = 0");
+        $sql = <<<EOF
+SELECT 
+    tasks.id,
+    tasks.user_id,
+    tasks.contents,
+    tasks.deadline,
+    categories.id as category_id, 
+    categories.name as category_name 
+from 
+    tasks 
+left join 
+    categories 
+on tasks.category_id = categories.id 
+where 
+    user_id = :user_id 
+    and status = 0
+EOF;
+        $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
         $res = $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
