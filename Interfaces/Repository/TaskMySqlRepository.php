@@ -72,12 +72,16 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
     public function findAllByUserId(TaskId $id)
     {
         $taskMappers = $this->taskDao->findAllByUserId($id->value());
+        // var_dump($taskMappers);
+        // die;
 
         $tasks = [];
         foreach ($taskMappers as $taskMapper) {
             $category = new Category(
                 new CategoryId($taskMapper['category_id']),
                 new CategoryName($taskMapper['category_name'])
+                // null,
+                // null
             );
 
             $tasks[] = new Task(

@@ -7,7 +7,7 @@ final class Category
     private $id;
     private $name;
 
-    public function __construct(?CategoryId $id, CategoryName $name)
+    public function __construct(?CategoryId $id, ?CategoryName $name)
     {
         $this->id = $id;
         $this->name = $name;
@@ -18,7 +18,7 @@ final class Category
         return $this->id;
     }
 
-    public function name(): CategoryName
+    public function name(): ?CategoryName
     {
         return $this->name;
     }

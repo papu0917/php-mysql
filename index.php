@@ -11,7 +11,7 @@ $userId = $_SESSION['id'];
 $taskId = new TaskId($userId);
 $taskRepositroy = new TaskMySqlRepository();
 $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
-var_dump($incompleteTasks);
+
 
 ?>
 <!DOCTYPE html>
