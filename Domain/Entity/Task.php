@@ -67,6 +67,7 @@ final class Task
         return $this->category->name()->value();
     }
 
+    // TODO 期限日が過ぎたら期限日の背景色を変える
     public function isOverDeadline(): bool
     {
         $now = new DateTime();

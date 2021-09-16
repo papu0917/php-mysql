@@ -75,6 +75,7 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
         // var_dump($taskMappers);
         // die;
 
+        // TODO カテゴリーを削除するとタスク一覧で該当するタスクが表示できなくなる、カテゴリーはnullでも表示したい
         $tasks = [];
         foreach ($taskMappers as $taskMapper) {
             $category = new Category(

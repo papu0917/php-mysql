@@ -52,7 +52,13 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                     <?php foreach ($incompleteTasks as $incompleteTask) : ?>
                         <tr>
                             <td class="contents"><?php echo $incompleteTask->contents()->value(); ?></td>
-                            <td><?php echo $incompleteTask->deadline()->format('Y-m-d'); ?></td>
+                            <td>
+                                <?php if ($incompleteTask->isOverDeadline()) : ?>
+                                    <div class="deadline-color"><?php echo $incompleteTask->deadline()->format("Y-m-d") ?></div>
+                                <?php else : ?>
+                                    <?php echo $incompleteTask->deadline()->format("Y-m-d") ?>
+                                <?php endif; ?>
+                            </td>
                             <td><a href="searchCategory.php?name=<?php echo $incompleteTask->categoryName(); ?>"><?php echo $incompleteTask->categoryName(); ?></a></td>
                             <td>
                                 <form action=" updateStatus.php" method="post">
