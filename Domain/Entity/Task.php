@@ -5,6 +5,7 @@ require_once __DIR__ . '/../../Domain/ValueObject/TaskId.php';
 require_once __DIR__ . '/../../Domain/ValueObject/TaskContents.php';
 require_once __DIR__ . '/../../Domain/ValueObject/UserId.php';
 require_once __DIR__ . '/../../Domain/ValueObject/CategoryId.php';
+require_once __DIR__ . '/../../Domain/ValueObject/CategoryName.php';
 require_once __DIR__ . '/../../Domain/Entity/Category.php';
 
 
@@ -19,7 +20,7 @@ final class Task
 
     public function __construct(
         ?TaskId $id,
-        UserId $userId,
+        ?UserId $userId,
         TaskContents $contents,
         DateTime $deadline,
         ?Category $category
@@ -36,7 +37,7 @@ final class Task
         return $this->id;
     }
 
-    public function userId(): UserId
+    public function userId(): ?UserId
     {
         return $this->userId;
     }
@@ -66,6 +67,7 @@ final class Task
         return $this->category->name()->value();
     }
 
+    // TODO 期限日が過ぎたら期限日の背景色を変える
     public function isOverDeadline(): bool
     {
         $now = new DateTime();

@@ -92,6 +92,10 @@ body {
     font-size: 40px;
     font-weight: 100;
 }
+#content .main .deadline-color {
+    width: 70%;
+    background-color: red;
+}
 
 /* table */
 #content thead {

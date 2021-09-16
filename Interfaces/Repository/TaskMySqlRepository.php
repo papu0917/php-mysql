@@ -21,6 +21,7 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
     {
         $taskMapper = $this->taskDao->findById($id->value());
 
+
         $category = new Category(
             new CategoryId($taskMapper['categoryId']),
             new CategoryName($taskMapper['categoryName'])
@@ -64,18 +65,34 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
         $this->taskDao->delete($id->value());
     }
 
-    public function findAllByUserId(UserId $userId)
+    public function isOverDeadline()
     {
-        $taskMappers = $this->taskDao->findAllByUserId($userId->value());
-        var_dump($taskMappers);
-        die;
+    }
 
-        // return new Task(
-        //     new TaskId($taskMappers['id']),
-        //     new UserId($taskMappers['user_id']),
-        //     new TaskContents($taskMappers['contents']),
-        //     new DateTime($taskMappers['deadline']),
-        //     $taskMappers['categoryName']
-        // );
+    public function findAllByUserId(TaskId $id)
+    {
+        $taskMappers = $this->taskDao->findAllByUserId($id->value());
+        // var_dump($taskMappers);
+        // die;
+
+        // TODO カテゴリーを削除するとタスク一覧で該当するタスクが表示できなくなる、カテゴリーはnullでも表示したい
+        $tasks = [];
+        foreach ($taskMappers as $taskMapper) {
+            $category = new Category(
+                new CategoryId($taskMapper['category_id']),
+                new CategoryName($taskMapper['category_name'])
+                // null,
+                // null
+            );
+
+            $tasks[] = new Task(
+                new TaskId($taskMapper['id']),
+                new UserId($taskMapper['user_id']),
+                new TaskContents($taskMapper['contents']),
+                new DateTime($taskMapper['deadline']),
+                $category
+            );
+        }
+        return $tasks;
     }
 }

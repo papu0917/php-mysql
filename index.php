@@ -3,14 +3,16 @@ ini_set('display_errors', 'on');
 require_once(__DIR__ . '/Session.php');
 $session = Session::getInstance();
 
-// require('getTask.php');
+require('getTask.php');
 require_once __DIR__ . '/Interfaces/Repository/TaskMySqlRepository.php';
 require_once __DIR__ . '/Domain/ValueObject/UserId.php';
 
 $userId = $_SESSION['id'];
-$taskId = new UserId($userId);
+$taskId = new TaskId($userId);
 $taskRepositroy = new TaskMySqlRepository();
 $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,20 +51,26 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                 <tbody>
                     <?php foreach ($incompleteTasks as $incompleteTask) : ?>
                         <tr>
-                            <td class="contents"><?php echo $incompleteTask['contents']; ?></td>
-                            <td><?php echo $incompleteTask['deadline']; ?></td>
-                            <td><a href="searchCategory.php?name=<?php echo $incompleteTask['name']; ?>"><?php echo $incompleteTask['name']; ?></a></td>
+                            <td class="contents"><?php echo $incompleteTask->contents()->value(); ?></td>
+                            <td>
+                                <?php if ($incompleteTask->isOverDeadline()) : ?>
+                                    <div class="deadline-color"><?php echo $incompleteTask->deadline()->format("Y-m-d") ?></div>
+                                <?php else : ?>
+                                    <?php echo $incompleteTask->deadline()->format("Y-m-d") ?>
+                                <?php endif; ?>
+                            </td>
+                            <td><a href="searchCategory.php?name=<?php echo $incompleteTask->categoryName(); ?>"><?php echo $incompleteTask->categoryName(); ?></a></td>
                             <td>
                                 <form action=" updateStatus.php" method="post">
                                     <input type="submit" class="botann1" name="id" value="完了" />
-                                    <input type="hidden" name="id" value="<?php echo $incompleteTask['id']; ?>">
+                                    <input type="hidden" name="id" value="<?php echo $incompleteTask->id()->value(); ?>">
                                 </form>
                             </td>
-                            <td><a class="botann2" href="edit.php?id=<?php echo $incompleteTask['id']; ?>">編集</a></td>
+                            <td><a class="botann2" href="edit.php?id=<?php echo $incompleteTask->id()->value(); ?>">編集</a></td>
                             <td>
                                 <form action="delete.php" method="post">
                                     <input type="submit" class="botann3" name="id" value="削除" />
-                                    <input type="hidden" name="id" value="<?php echo $incompleteTask['id']; ?>">
+                                    <input type="hidden" name="id" value="<?php echo $incompleteTask->id()->value(); ?>">
                                 </form>
                             </td>
                         </tr>
