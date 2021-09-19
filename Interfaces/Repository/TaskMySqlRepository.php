@@ -65,25 +65,22 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
         $this->taskDao->delete($id->value());
     }
 
-    public function isOverDeadline()
-    {
-    }
-
     public function findAllByUserId(TaskId $id)
     {
         $taskMappers = $this->taskDao->findAllByUserId($id->value());
         // var_dump($taskMappers);
         // die;
 
-        // TODO カテゴリーを削除するとタスク一覧で該当するタスクが表示できなくなる、カテゴリーはnullでも表示したい
         $tasks = [];
         foreach ($taskMappers as $taskMapper) {
-            $category = new Category(
-                new CategoryId($taskMapper['category_id']),
-                new CategoryName($taskMapper['category_name'])
-                // null,
-                // null
-            );
+            if (empty($taskMapper['category_id'])) {
+                $category = null;
+            } else {
+                $category = new Category(
+                    new CategoryId($taskMapper['category_id']),
+                    new CategoryName($taskMapper['category_name'])
+                );
+            }
 
             $tasks[] = new Task(
                 new TaskId($taskMapper['id']),
