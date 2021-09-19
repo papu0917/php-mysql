@@ -3,7 +3,6 @@ ini_set('display_errors', 'on');
 require_once(__DIR__ . '/Session.php');
 $session = Session::getInstance();
 
-require('getTask.php');
 require_once __DIR__ . '/Interfaces/Repository/TaskMySqlRepository.php';
 require_once __DIR__ . '/Domain/ValueObject/UserId.php';
 
@@ -11,8 +10,6 @@ $userId = $_SESSION['id'];
 $taskId = new TaskId($userId);
 $taskRepositroy = new TaskMySqlRepository();
 $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,13 +50,25 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                         <tr>
                             <td class="contents"><?php echo $incompleteTask->contents()->value(); ?></td>
                             <td>
-                                <?php if ($incompleteTask->isOverDeadline()) : ?>
-                                    <div class="deadline-color"><?php echo $incompleteTask->deadline()->format("Y-m-d") ?></div>
-                                <?php else : ?>
+                                <?php
+                                if ($incompleteTask->isOverDeadline()) {
+                                    $deadlineClass = 'deadline-color';
+                                } else {
+                                    $deadlineClass = '';
+                                }
+                                ?>
+                                <div class="<?php echo $deadlineClass; ?>">
                                     <?php echo $incompleteTask->deadline()->format("Y-m-d") ?>
+                                </div>
+                            </td>
+                            <td>
+                                <?php if ($incompleteTask->hasCategory()) : ?>
+
+                                    <a href="searchCategory.php?name=<?php echo $incompleteTask->categoryName(); ?>"><?php echo
+                                                                                                                        $incompleteTask->categoryName(); ?></a>
+
                                 <?php endif; ?>
                             </td>
-                            <td><a href="searchCategory.php?name=<?php echo $incompleteTask->categoryName(); ?>"><?php echo $incompleteTask->categoryName(); ?></a></td>
                             <td>
                                 <form action=" updateStatus.php" method="post">
                                     <input type="submit" class="botann1" name="id" value="完了" />
