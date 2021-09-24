@@ -5,6 +5,7 @@ require_once __DIR__ . '/../../Infrastructure/Dao/CategoryDao.php';
 require_once __DIR__ . '/../../UseCase/Repository/TaskRepositoryInterface.php';
 require_once __DIR__ . '/../../Domain/Entity/Task.php';
 require_once __DIR__ . '/../../Domain/ValueObject/UserId.php';
+require_once __DIR__ . '/../../categoryFactory.php';
 
 final class TaskMySqlRepository implements TaskRepositoryInterface
 {
@@ -21,11 +22,14 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
     {
         $taskMapper = $this->taskDao->findById($id->value());
 
-
-        $category = new Category(
-            new CategoryId($taskMapper['categoryId']),
-            new CategoryName($taskMapper['categoryName'])
-        );
+        if (empty($taskMapper['category_id'])) {
+            $category = null;
+        } else {
+            $category = CategoryFactory::create(
+                new CategoryId($taskMapper['categoryId']),
+                new CategoryName($taskMapper['categoryName'])
+            );
+        }
 
         return new Task(
             new TaskId($taskMapper['id']),
@@ -68,15 +72,13 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
     public function findAllByUserId(TaskId $id)
     {
         $taskMappers = $this->taskDao->findAllByUserId($id->value());
-        // var_dump($taskMappers);
-        // die;
 
         $tasks = [];
         foreach ($taskMappers as $taskMapper) {
             if (empty($taskMapper['category_id'])) {
                 $category = null;
             } else {
-                $category = new Category(
+                $category = CategoryFactory::create(
                     new CategoryId($taskMapper['category_id']),
                     new CategoryName($taskMapper['category_name'])
                 );
