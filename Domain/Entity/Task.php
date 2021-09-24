@@ -78,5 +78,11 @@ final class Task
         $now = new DateTime();
         return ($this->deadline < $now);
     }
+
     // TODO 期限日が5日前になったら期限日の背景色を黄色にする
+    public function deadlineFiveDaysBefore()
+    {
+        $now = new DateTime();
+        return ($now->modify('-5 day') >= $this->deadline && $this->deadline <= $now);
+    }
 }

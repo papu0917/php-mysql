@@ -1,8 +1,8 @@
 <?php
 
-function redirectIndex(): void
+function redirectSignIn(): void
 {
-    header('Location: /index.php');
+    header('Location: /signin.php');
 }
 
 function redirectCategoryIndex(): void

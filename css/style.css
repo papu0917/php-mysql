@@ -96,6 +96,10 @@ body {
     width: 70%;
     background-color: red;
 }
+#content .main .deadline-yellow {
+    width: 70%;
+    background-color: yellow;
+}
 
 /* table */
 #content thead {

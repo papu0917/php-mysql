@@ -4,5 +4,5 @@ require_once(__DIR__ . '/redirect.php');
 
 $session = Session::getInstance();
 $session->clearAuth();
-redirectIndex();
+redirectSignIn();
 die;

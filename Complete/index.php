@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', 'on');
-require('getTask.php');
+require('/getTask.php');
 ?>
 <!DOCTYPE html>
 <html>
