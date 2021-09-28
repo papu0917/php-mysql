@@ -6,6 +6,7 @@ require_once __DIR__ . '/../../UseCase/Repository/TaskRepositoryInterface.php';
 require_once __DIR__ . '/../../Domain/Entity/Task.php';
 require_once __DIR__ . '/../../Domain/ValueObject/UserId.php';
 require_once __DIR__ . '/../../categoryFactory.php';
+require_once __DIR__ . '/../../TaskFactory.php';
 
 final class TaskMySqlRepository implements TaskRepositoryInterface
 {
@@ -18,6 +19,7 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
         $this->categoryDao = new CategoryDao();
     }
 
+    // TODO category_idとcategory_nameがundefindな件
     public function findById(TaskId $id): Task
     {
         $taskMapper = $this->taskDao->findById($id->value());
@@ -26,13 +28,16 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
             $taskMapper['category_id'],
             $taskMapper['category_name']
         );
-        return new Task(
-            new TaskId($taskMapper['id']),
-            new UserId($taskMapper['user_id']),
-            new TaskContents($taskMapper['contents']),
-            new DateTime($taskMapper['deadline']),
+
+        $task = TaskFactory::create(
+            $taskMapper['id'],
+            $taskMapper['user_id'],
+            $taskMapper['contents'],
+            $taskMapper['deadline'],
             $category
         );
+
+        return $task;
     }
 
     public function insert(Task $task)
@@ -76,11 +81,11 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
             );
 
             // TODO ファクトリーにする
-            $tasks[] = new Task(
-                new TaskId($taskMapper['id']),
-                new UserId($taskMapper['user_id']),
-                new TaskContents($taskMapper['contents']),
-                new DateTime($taskMapper['deadline']),
+            $tasks[] = TaskFactory::create(
+                $taskMapper['id'],
+                $taskMapper['user_id'],
+                $taskMapper['contents'],
+                $taskMapper['deadline'],
                 $category
             );
         }
