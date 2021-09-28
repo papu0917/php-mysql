@@ -22,15 +22,10 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
     {
         $taskMapper = $this->taskDao->findById($id->value());
 
-        if (empty($taskMapper['category_id'])) {
-            $category = null;
-        } else {
-            $category = CategoryFactory::create(
-                new CategoryId($taskMapper['categoryId']),
-                new CategoryName($taskMapper['categoryName'])
-            );
-        }
-
+        $category = CategoryFactory::create(
+            $taskMapper['category_id'],
+            $taskMapper['category_name']
+        );
         return new Task(
             new TaskId($taskMapper['id']),
             new UserId($taskMapper['user_id']),
@@ -75,15 +70,12 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
 
         $tasks = [];
         foreach ($taskMappers as $taskMapper) {
-            if (empty($taskMapper['category_id'])) {
-                $category = null;
-            } else {
-                $category = CategoryFactory::create(
-                    new CategoryId($taskMapper['category_id']),
-                    new CategoryName($taskMapper['category_name'])
-                );
-            }
+            $category = CategoryFactory::create(
+                $taskMapper['category_id'],
+                $taskMapper['category_name']
+            );
 
+            // TODO ファクトリーにする
             $tasks[] = new Task(
                 new TaskId($taskMapper['id']),
                 new UserId($taskMapper['user_id']),

@@ -3,8 +3,13 @@ require_once __DIR__ . '/Domain/Entity/Category.php';
 
 class CategoryFactory
 {
-    public static function create($id, $name)
+    public static function create(?int $id, ?string $name): ?Category
     {
-        return new Category($id, $name);
+        return (is_null($id))
+            ? null
+            : new Category(
+                new CategoryId($id),
+                new CategoryName($name)
+            );
     }
 }
