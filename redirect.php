@@ -1,5 +1,10 @@
 <?php
 
+function redirectIndex()
+{
+    header('Location: /index.php');
+}
+
 function redirectSignIn(): void
 {
     header('Location: /signin.php');

@@ -1,17 +1,16 @@
 <?php
 require_once(__DIR__ . '/Session.php');
+require('Category/getCategories.php');
+require_once __DIR__ . '/Domain/ValueObject/TaskId.php';
+require_once __DIR__ . '/Interfaces/Repository/TaskMySqlRepository.php';
+
 $session = Session::getInstance();
 $errorMessages = $_SESSION['errorMessages'] ?? [];
 $formInputs = $_SESSION['formInputs'] ?? [];
 unset($_SESSION['errorMessages'], $_SESSION['formInputs']);
 
-require('getTask.php');
-require('Category/getCategories.php');
-require_once __DIR__ . '/Domain/ValueObject/TaskId.php';
-require_once __DIR__ . '/Interfaces/Repository/TaskMySqlRepository.php';
-
-$id = $_GET['id'];
-$taskId = new TaskId($id);
+$userId = $_GET['id'];
+$taskId = new TaskId($userId);
 $taskRepositroy = new TaskMySqlRepository();
 $task = $taskRepositroy->findById($taskId);
 ?>
