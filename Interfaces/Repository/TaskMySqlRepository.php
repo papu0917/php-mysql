@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/../../Infrastructure/Dao/TaskDao.php';
 require_once __DIR__ . '/../../Infrastructure/Dao/CategoryDao.php';
 require_once __DIR__ . '/../../UseCase/Repository/TaskRepositoryInterface.php';
@@ -80,7 +79,6 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
                 $taskMapper['category_name']
             );
 
-            // TODO ファクトリーにする
             $tasks[] = TaskFactory::create(
                 $taskMapper['id'],
                 $taskMapper['user_id'],
