@@ -63,10 +63,7 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                             </td>
                             <td>
                                 <?php if ($incompleteTask->hasCategory()) : ?>
-
-                                    <a href="searchCategory.php?name=<?php echo $incompleteTask->categoryName(); ?>"><?php echo
-                                                                                                                        $incompleteTask->categoryName(); ?></a>
-
+                                    <a href="searchCategory.php?name=<?php echo $incompleteTask->categoryName(); ?>"><?php echo $incompleteTask->categoryName(); ?></a>
                                 <?php endif; ?>
                             </td>
                             <td>
