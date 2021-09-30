@@ -1,8 +1,9 @@
 <?php
 require_once(__DIR__ . '/Session.php');
 require_once(__DIR__ . '/SignInValidate.php');
-require_once(__DIR__ . '/Infrastructure/Dao/UserDao.php');
+require_once __DIR__ . '/Interfaces/Repository/UserMySqlRepository.php';
 require_once(__DIR__ . '/ViewModel/SignInViewModel.php');
+require_once __DIR__ . '/Domain/Entity/User.php';
 
 $email = filter_input(INPUT_POST, 'email');
 $password = filter_input(INPUT_POST, 'password');
@@ -19,8 +20,9 @@ if (!$signInInputError->isEmpty()) {
     die;
 }
 
-$userDao = new UserDao();
-$user = $userDao->findByEmail($email);
+$userEmail = new UserEmail($email);
+$userMysqlRepository = new UserMysqlRepository();
+$user = $userMysqlRepository->findByEmail($userEmail);
 $isValid = password_verify($password, $user['password']);
 $signInViewModel = new SignInViewModel($isValid);
 
