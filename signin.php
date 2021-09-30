@@ -30,6 +30,7 @@ unset($_SESSION['errors'], $_SESSION['formInputs']);
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
+
             <form action="signinComplete.php" method="post">
                 <input class="width" type="text" name="email" placeholder="Email" value="<?php echo $formInputs['email'] ?? ''; ?>" /><br />
                 <input class="width" type="password" name="password" placeholder="Password" /><br />
