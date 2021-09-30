@@ -1,12 +1,12 @@
 <?php
-require_once __DIR__ . '/../../Infrastructure/Dao/TaskDao.php';
-require_once __DIR__ . '/../../Infrastructure/Dao/CategoryDao.php';
+// require_once __DIR__ . '/../../Infrastructure/Dao/TaskDao.php';
+// require_once __DIR__ . '/../../Infrastructure/Dao/CategoryDao.php';
 require_once __DIR__ . '/../../Domain/ValueObject/TaskId.php';
 require_once __DIR__ . '/../../Domain/ValueObject/TaskContents.php';
 require_once __DIR__ . '/../../Domain/ValueObject/UserId.php';
 require_once __DIR__ . '/../../Domain/ValueObject/CategoryId.php';
 require_once __DIR__ . '/../../Domain/ValueObject/CategoryName.php';
-require_once __DIR__ . '/../../Domain/Entity/Category.php';
+// require_once __DIR__ . '/../../Domain/Entity/Category.php';
 
 final class Task
 {
