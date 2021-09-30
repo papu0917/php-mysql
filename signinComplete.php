@@ -1,14 +1,26 @@
 <?php
 require_once(__DIR__ . '/Session.php');
+require_once(__DIR__ . '/SignInValidate.php');
 require_once(__DIR__ . '/Infrastructure/Dao/UserDao.php');
 require_once(__DIR__ . '/ViewModel/SignInViewModel.php');
 
 $email = filter_input(INPUT_POST, 'email');
 $password = filter_input(INPUT_POST, 'password');
 
+$signInValidate = new SignInValidate($email, $password);
+$signInInputError = $signInValidate->messages();
+
+if (!$signInInputError->isEmpty()) {
+    $session = Session::getInstance();
+    $session->setSignInInputErrorMessages($signInInputError, $email);
+
+    // TODO: Redirectクラスを使う
+    header('Location: /signin.php');
+    die;
+}
+
 $userDao = new UserDao();
 $user = $userDao->findByEmail($email);
-
 $isValid = password_verify($password, $user['password']);
 $signInViewModel = new SignInViewModel($isValid);
 

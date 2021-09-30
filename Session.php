@@ -47,4 +47,15 @@ final class Session
     {
         unset($_SESSION['id'], $_SESSION['name']);
     }
+
+    public function setSignInInputErrorMessages(
+        SignInInputError $signInInputError,
+        string $email
+    ): void {
+
+        $_SESSION['errors'] = $signInInputError;
+        $_SESSION['formInputs'] = [
+            'email' => $email,
+        ];
+    }
 }
