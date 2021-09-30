@@ -9,7 +9,7 @@ final class UserDao extends Dao
         parent::__construct();
     }
 
-    public function findByEmail(string $email): array
+    public function findByEmail(string $email)
     {
         $sql = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->pdo->prepare($sql);

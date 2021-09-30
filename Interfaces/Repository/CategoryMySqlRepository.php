@@ -1,5 +1,4 @@
 <?php
-
 require_once __DIR__ . '/../../Infrastructure/Dao/CategoryDao.php';
 require_once __DIR__ . '/../../Domain/Entity/Category.php';
 
