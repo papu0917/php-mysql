@@ -23,14 +23,11 @@ require('../getTask.php');
                 <h2>カテゴリ一覧</h2>
                 <div class="index">
                     <form action="createComplete.php" method="post">
-                        <input class="width input" type="text" name="name" placeholder="カテゴリー追加" />
+                        <input class="width" type="text" name="name" placeholder="カテゴリー追加" />
                         <button class="submit">登録</button>
-                        <div class="error-messages">
-                            <span class="error-message"></span>
-                        </div>
                     </form>
                 </div>
-                <div class=" table">
+                <div class="table">
                     <table class="table-list">
                         <?php foreach ($categories as $category) : ?>
                             <tr class="category">
@@ -54,41 +51,9 @@ require('../getTask.php');
     </div>
     <script>
         const btn = document.querySelector('.submit');
-        btn.addEventListener('click', async function(event) {
-            // デフォルトのサブミットを止める
+        btn.addEventListener('click', function(event) {
             event.preventDefault();
             console.log('クリックされました！');
-
-            const nameInput = document.querySelector('.input');
-            const name = nameInput.value;
-            // APIを叩くための準備
-            const obj = {
-                name,
-            };
-            const body = JSON.stringify(obj);
-            const headers = {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            };
-            // APIを叩く.デフォルトはGET
-            const response = await fetch(
-                '/Api/Category/createComplete.php', {
-                    method: "POST",
-                    headers,
-                    body
-                });
-            const json = await response.json();
-            console.log('response', response);
-            console.log('json', json);
-
-            if (json.status) {
-                alert(json.message);
-                const message = document.querySelector('.category');
-                message.innerHTML = json.name;
-            } else {
-                const errorMessage = document.querySelector('.error-message');
-                errorMessage.innerHTML = json.message;
-            }
         }, false);
     </script>
 </body>
