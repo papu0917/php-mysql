@@ -19,7 +19,7 @@ $name = json_decode(file_get_contents('php://input'), true);
 //     'message' => 'カテゴリの追加に成功しました'
 // ];
 // echo json_encode($responseBody);
-// die;
+// die;    
 
 // if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 //     $responseBody = [
@@ -49,6 +49,7 @@ $categoryRepository->insert($newCategory);
 
 $response = [
     'status' => true,
+    'name' => $name['name'],
     'message' => '登録に成功しました'
 ];
 echo json_encode($response);
