@@ -5,6 +5,8 @@ require_once(__DIR__ . '/Infrastructure/Dao/UserDao.php');
 require_once __DIR__ . '/Domain/ValueObject/UserEmail.php';
 require_once __DIR__ . '/Domain/Entity/User.php';
 require_once __DIR__ . '/Interfaces/Repository/UserMySqlRepository.php';
+require_once(__DIR__ . '/UseCase/UserRegisterUseCase.php');
+require_once(__DIR__ . '/Domain/Factory/UserFactory.php');
 date_default_timezone_set('Asia/Tokyo');
 
 // (1) 登録するデータを用意
@@ -36,27 +38,6 @@ if (count($errorMessages) != 0) {
     die;
 }
 
-$userEmail = new UserEmail($email);
-$userMysqlRepository = new UserMysqlRepository();
-$userEmail = $userMysqlRepository->findByEmail($userEmail);
-
-if ($userEmail['email'] === $email) {
-    $message = '同じメールアドレスが存在します。';
-    $link = '<a href="signup.php">戻る</a>';
-} else {
-    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
-    $newUser = new User(
-        null,
-        new UserName($name),
-        new UserEmail($email),
-        new UserPassword($passwordHash)
-    );
-
-    $userRepository = new UserMysqlRepository();
-    $userRepository->insert($newUser);
-    $message = '登録できました。';
-    $link = '<a href="signin.php">ログインはこちら</a>';
-}
-
-echo $message;
-echo $link;
+$userRegisterUseCase = new UserRegisterUseCase($name, $email, $password);
+$result = $userRegisterUseCase->handler();
+echo implode("", $result);

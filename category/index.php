@@ -3,7 +3,7 @@ require_once(__DIR__ . '/../Session.php');
 Session::getInstance();
 
 require('getCategories.php');
-require('../getTask.php');
+// require('../getTask.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,7 +42,6 @@ require('../getTask.php');
                                         <input type="hidden" name="id" value="<?php echo $category['id']; ?>">
                                     </form>
                                 </td>
-                                <!-- <td><a class="botann2" href="delete.php?id=<?php echo $category['id']; ?>">削除</a></td> -->
                             </tr>
                         <?php endforeach; ?>
                     </table>
@@ -57,7 +56,6 @@ require('../getTask.php');
         btn.addEventListener('click', async function(event) {
             // デフォルトのサブミットを止める
             event.preventDefault();
-            console.log('クリックされました！');
 
             const nameInput = document.querySelector('.input');
             const name = nameInput.value;
@@ -82,14 +80,46 @@ require('../getTask.php');
             console.log('json', json);
 
             if (json.status) {
-                alert(json.message);
+                // alert(json.message);
+                nameInput.value = "";
+
                 const message = document.querySelector('.category');
-                message.innerHTML = json.name;
+                // location.href = "/Category/index.php";
+                appendCategoryTr(1, json.name);
             } else {
                 const errorMessage = document.querySelector('.error-message');
                 errorMessage.innerHTML = json.message;
             }
         }, false);
+
+        function appendCategoryTr(categoryId, categoryName) {
+            const tr = document.createElement('tr');
+            tr.classList.add('category');
+
+            const nameTd = document.createElement('td');
+            nameTd.textContent = categoryName;
+
+            const editTd = document.createElement('td');
+            const editA = document.createElement('a');
+            editA.href = 'edit.php?id=' + categoryId;
+            editA.textContent = '編集';
+            editA.classList.add('botann1');
+            editTd.appendChild(editA);
+
+            const deleteTd = document.createElement('td');
+            const deleteA = document.createElement('a');
+            deleteA.href = 'delete.php?id=' + categoryId;
+            deleteA.textContent = '削除';
+            deleteA.classList.add('botann2');
+            deleteTd.appendChild(deleteA);
+
+            tr.appendChild(nameTd);
+            tr.appendChild(editTd);
+            tr.appendChild(deleteTd);
+
+            const tbody = document.querySelector('.table-list tbody');
+            tbody.appendChild(tr);
+        }
     </script>
 </body>
 

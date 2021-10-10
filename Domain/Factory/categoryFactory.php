@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/Domain/Entity/Category.php';
+require_once __DIR__ . '/../../Domain/Entity/Category.php';
 
 class CategoryFactory
 {

@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/Domain/Entity/Task.php';
+require_once __DIR__ . '/../../Domain/Entity/Task.php';
 
-class TaskFactory
+final class TaskFactory
 {
     public static function create(
         int $id,

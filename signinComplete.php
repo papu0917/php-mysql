@@ -4,6 +4,7 @@ require_once(__DIR__ . '/SignInValidate.php');
 require_once __DIR__ . '/Interfaces/Repository/UserMySqlRepository.php';
 require_once(__DIR__ . '/ViewModel/SignInViewModel.php');
 require_once __DIR__ . '/Domain/Entity/User.php';
+require_once __DIR__ . '/Domain/Entity/User.php';
 
 $email = filter_input(INPUT_POST, 'email');
 $password = filter_input(INPUT_POST, 'password');
@@ -21,9 +22,16 @@ if (!$signInInputError->isEmpty()) {
 }
 
 $userEmail = new UserEmail($email);
+
 $userMysqlRepository = new UserMysqlRepository();
+// var_dump($userMysqlRepository);
+// die;
 $user = $userMysqlRepository->findByEmail($userEmail);
+// var_dump($user);
+// die;
+
 $isValid = password_verify($password, $user['password']);
+
 $signInViewModel = new SignInViewModel($isValid);
 
 if ($isValid) {

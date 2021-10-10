@@ -13,4 +13,9 @@ final class UserPassword
     {
         return $this->value;
     }
+
+    public function hash(): string
+    {
+        return password_hash($this->value, PASSWORD_DEFAULT);
+    }
 }
