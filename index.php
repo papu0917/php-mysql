@@ -1,6 +1,7 @@
 <?php
 ini_set('display_errors', 'on');
 require_once(__DIR__ . '/Session.php');
+require_once(__DIR__ . '/Category/getCategories.php');
 $session = Session::getInstance();
 
 require_once __DIR__ . '/Interfaces/Repository/TaskMySqlRepository.php';
@@ -28,12 +29,29 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                 <div class="uncomplete-button"><a href="">未完了</a></div>
                 <div class="complete-button"><a class="complete" href="../complete/index.php">完了</a></div>
             </div>
-            <div class="task-search">
-                <form action="searchTask.php" method="post">
-                    <input type="text" class="form" name="searchWord" placeholder="キーワードを入力">
-                    <input type="submit" class="button" value="検索">
-                </form>
-            </div>
+
+
+
+            <form action="createComplete.php" method="post">
+                <div class="box">
+                    <input class="box-001 contents" type="text" name="contents" placeholder="タスクを追加" value="<?php echo $formInputs['contents'] ?? ''; ?>" />
+                </div>
+                <div class="box">
+                    <input class="box-002 deadline" type="date" name="deadline" placeholder="" value="<?php echo $formInputs['deadline'] ?? ''; ?>" />
+                </div>
+                <div class="box">
+                    <select name="category" class="category">
+                        <?php foreach ($categories as $category) : ?>
+                            <?php echo '<option value="', $category['id'], '">', $category['name'], '</option>'; ?>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <button class="insert">追加</button>
+            </form>
+
+
+
+
             <h2 class="title">未完了タスク一覧</h2>
             <table class="table">
                 <thead>
@@ -83,10 +101,48 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                     <?php endforeach; ?>
                 </tbody>
             </table>
-
         </div>
     </div>
     <?php require('footer.php'); ?>
 </div>
+
+<script>
+    const btn = document.querySelector('.insert');
+    btn.addEventListener('click', async function(event) {
+        // デフォルトのサブミットを止める
+        event.preventDefault();
+
+        const contentsInput = document.querySelector('.contents');
+        const contents = contentsInput.value;
+
+        const deadlineInput = document.querySelector('.deadline');
+        const deadline = deadlineInput.value;
+
+        const categoryInput = document.querySelector('.category');
+        const categoryId = categoryInput.value;
+
+        // APIを叩くための準備
+        const obj = {
+            contents,
+            deadline,
+            categoryId,
+        };
+        const body = JSON.stringify(obj);
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        };
+        // APIを叩く.デフォルトはGET
+        const response = await fetch(
+            '/Api/Task/createComplete.php', {
+                method: "POST",
+                headers,
+                body
+            });
+        const json = await response.json();
+        console.log('response', response);
+        console.log('json', json);
+    }, false);
+</script>
 
 </html>
