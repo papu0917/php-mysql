@@ -4,8 +4,8 @@ require_once __DIR__ . '/../../Infrastructure/Dao/CategoryDao.php';
 require_once __DIR__ . '/../../UseCase/Repository/TaskRepositoryInterface.php';
 require_once __DIR__ . '/../../Domain/Entity/Task.php';
 require_once __DIR__ . '/../../Domain/ValueObject/UserId.php';
-require_once __DIR__ . '/../../categoryFactory.php';
-require_once __DIR__ . '/../../TaskFactory.php';
+require_once __DIR__ . '/../../Domain/Factory/categoryFactory.php';
+require_once __DIR__ . '/../../Domain/Factory/TaskFactory.php';
 
 final class TaskMySqlRepository implements TaskRepositoryInterface
 {

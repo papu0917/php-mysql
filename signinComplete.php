@@ -1,15 +1,37 @@
 <?php
 require_once(__DIR__ . '/Session.php');
-require_once(__DIR__ . '/Infrastructure/Dao/UserDao.php');
+require_once(__DIR__ . '/SignInValidate.php');
+require_once __DIR__ . '/Interfaces/Repository/UserMySqlRepository.php';
 require_once(__DIR__ . '/ViewModel/SignInViewModel.php');
+require_once __DIR__ . '/Domain/Entity/User.php';
+require_once __DIR__ . '/Domain/Entity/User.php';
 
 $email = filter_input(INPUT_POST, 'email');
 $password = filter_input(INPUT_POST, 'password');
 
-$userDao = new UserDao();
-$user = $userDao->findByEmail($email);
+$signInValidate = new SignInValidate($email, $password);
+$signInInputError = $signInValidate->messages();
+
+if (!$signInInputError->isEmpty()) {
+    $session = Session::getInstance();
+    $session->setSignInInputErrorMessages($signInInputError, $email);
+
+    // TODO: Redirectクラスを使う
+    header('Location: /signin.php');
+    die;
+}
+
+$userEmail = new UserEmail($email);
+
+$userMysqlRepository = new UserMysqlRepository();
+// var_dump($userMysqlRepository);
+// die;
+$user = $userMysqlRepository->findByEmail($userEmail);
+// var_dump($user);
+// die;
 
 $isValid = password_verify($password, $user['password']);
+
 $signInViewModel = new SignInViewModel($isValid);
 
 if ($isValid) {
