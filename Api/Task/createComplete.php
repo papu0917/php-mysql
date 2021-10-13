@@ -13,9 +13,6 @@ header("Content-Type: application/json; charset=UTF-8"); //ヘッダー情報の
 $newContents = json_decode(file_get_contents('php://input'), true);
 var_dump($newContents);
 
-
-
-
 $userId = $_SESSION['id'];
 $contents = filter_input(INPUT_POST, 'contents');
 $deadline = filter_input(INPUT_POST, 'deadline');
