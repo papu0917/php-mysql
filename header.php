@@ -12,8 +12,7 @@
             <li>
                 <div class="task-search">
                     <form action="searchTask.php" method="post">
-                        <input type="text" class="form" name="searchWord" placeholder="キーワードを入力">
-                        <input type="submit" class="button" value="検索">
+                        <input type="text" class="form" name="searchWord" placeholder="タスクを探す">
                     </form>
                 </div>
             </li>

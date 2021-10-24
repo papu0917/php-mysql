@@ -32,7 +32,7 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
 
 
 
-            <form action="createComplete.php" method="post">
+            <form action="" method="post">
                 <div class="box">
                     <input class="box-001 contents" type="text" name="contents" placeholder="タスクを追加" value="<?php echo $formInputs['contents'] ?? ''; ?>" />
                 </div>
@@ -48,10 +48,6 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                 </div>
                 <button class="insert">追加</button>
             </form>
-
-
-
-
             <h2 class="title">未完了タスク一覧</h2>
             <table class="table">
                 <thead>
@@ -63,9 +59,9 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                         <th><a class="botann" href="descendingOrder.php">締切降順</a></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="tbody">
                     <?php foreach ($incompleteTasks as $incompleteTask) : ?>
-                        <tr>
+                        <tr class="taskInfo">
                             <td class="contents"><?php echo $incompleteTask->contents()->value(); ?></td>
                             <td>
                                 <?php
@@ -79,7 +75,7 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                                     <?php echo $incompleteTask->deadline()->format("Y-m-d") ?>
                                 </div>
                             </td>
-                            <td>
+                            <td class="category-name">
                                 <?php if ($incompleteTask->hasCategory()) : ?>
                                     <a href="searchCategory.php?name=<?php echo $incompleteTask->categoryName(); ?>"><?php echo $incompleteTask->categoryName(); ?></a>
                                 <?php endif; ?>
@@ -121,7 +117,6 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
         const categoryInput = document.querySelector('.category');
         const categoryId = categoryInput.value;
 
-        // APIを叩くための準備
         const obj = {
             contents,
             deadline,
@@ -142,6 +137,50 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
         const json = await response.json();
         console.log('response', response);
         console.log('json', json);
+
+        if (json.status) {
+            contentsInput.value = "";
+            deadlineInput.value = "";
+            categoryInput.value = "";
+
+            const {
+                data: {
+                    id,
+                    contents,
+                    deadline,
+                    category
+                }
+            } = json;
+
+            const tr = document.createElement('tr');
+            tr.classList.add('taskInfo');
+
+            const contentsTd = document.createElement('td');
+            contentsTd.textContent = contents;
+
+            const deadlineTd = document.createElement('td');
+            deadlineTd.textContent = deadline;
+
+            const categoryTd = document.createElement('td');
+            const categoryLink = document.createElement('a');
+            // 分割代入
+            const {
+                name
+            } = category;
+            // const category = json.category;
+
+            categoryLink.href = 'searchCategory.php?name=' + name;
+            categoryLink.textContent = name;
+            categoryLink.classList.add('category-name');
+            categoryTd.appendChild(categoryLink);
+
+            tr.appendChild(contentsTd);
+            tr.appendChild(deadlineTd);
+            tr.appendChild(categoryTd);
+
+            const tbody = document.querySelector('.tbody');
+            tbody.appendChild(tr);
+        }
     }, false);
 </script>
 

@@ -82,10 +82,19 @@ require('getCategories.php');
             if (json.status) {
                 // alert(json.message);
                 nameInput.value = "";
+                // const data = json.data; 下と同じ
+                // const { data } = json; 
+                // const { id, name } = data; 
+                const {
+                    data: {
+                        id,
+                        name
+                    }
+                } = json;
 
                 const message = document.querySelector('.category');
                 // location.href = "/Category/index.php";
-                appendCategoryTr(1, json.name);
+                appendCategoryTr(id, name);
             } else {
                 const errorMessage = document.querySelector('.error-message');
                 errorMessage.innerHTML = json.message;
