@@ -1,6 +1,7 @@
 <?php
 ini_set('display_errors', 'on');
 require_once(__DIR__ . '/Session.php');
+require_once(__DIR__ . '/Category/getCategories.php');
 $session = Session::getInstance();
 
 require_once __DIR__ . '/Interfaces/Repository/TaskMySqlRepository.php';
@@ -28,12 +29,25 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                 <div class="uncomplete-button"><a href="">未完了</a></div>
                 <div class="complete-button"><a class="complete" href="../complete/index.php">完了</a></div>
             </div>
-            <div class="task-search">
-                <form action="searchTask.php" method="post">
-                    <input type="text" class="form" name="searchWord" placeholder="キーワードを入力">
-                    <input type="submit" class="button" value="検索">
-                </form>
-            </div>
+
+
+
+            <form action="" method="post">
+                <div class="box">
+                    <input class="box-001 contents" type="text" name="contents" placeholder="タスクを追加" value="<?php echo $formInputs['contents'] ?? ''; ?>" />
+                </div>
+                <div class="box">
+                    <input class="box-002 deadline" type="date" name="deadline" placeholder="" value="<?php echo $formInputs['deadline'] ?? ''; ?>" />
+                </div>
+                <div class="box">
+                    <select name="category" class="category">
+                        <?php foreach ($categories as $category) : ?>
+                            <?php echo '<option value="', $category['id'], '">', $category['name'], '</option>'; ?>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <button class="insert">追加</button>
+            </form>
             <h2 class="title">未完了タスク一覧</h2>
             <table class="table">
                 <thead>
@@ -45,9 +59,9 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                         <th><a class="botann" href="descendingOrder.php">締切降順</a></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="tbody">
                     <?php foreach ($incompleteTasks as $incompleteTask) : ?>
-                        <tr>
+                        <tr class="taskInfo">
                             <td class="contents"><?php echo $incompleteTask->contents()->value(); ?></td>
                             <td>
                                 <?php
@@ -61,7 +75,7 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                                     <?php echo $incompleteTask->deadline()->format("Y-m-d") ?>
                                 </div>
                             </td>
-                            <td>
+                            <td class="category-name">
                                 <?php if ($incompleteTask->hasCategory()) : ?>
                                     <a href="searchCategory.php?name=<?php echo $incompleteTask->categoryName(); ?>"><?php echo $incompleteTask->categoryName(); ?></a>
                                 <?php endif; ?>
@@ -83,10 +97,91 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                     <?php endforeach; ?>
                 </tbody>
             </table>
-
         </div>
     </div>
     <?php require('footer.php'); ?>
 </div>
+
+<script>
+    const btn = document.querySelector('.insert');
+    btn.addEventListener('click', async function(event) {
+        // デフォルトのサブミットを止める
+        event.preventDefault();
+
+        const contentsInput = document.querySelector('.contents');
+        const contents = contentsInput.value;
+
+        const deadlineInput = document.querySelector('.deadline');
+        const deadline = deadlineInput.value;
+
+        const categoryInput = document.querySelector('.category');
+        const categoryId = categoryInput.value;
+
+        const obj = {
+            contents,
+            deadline,
+            categoryId,
+        };
+        const body = JSON.stringify(obj);
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        };
+        // APIを叩く.デフォルトはGET
+        const response = await fetch(
+            '/Api/Task/createComplete.php', {
+                method: "POST",
+                headers,
+                body
+            });
+        const json = await response.json();
+        console.log('response', response);
+        console.log('json', json);
+
+        if (json.status) {
+            contentsInput.value = "";
+            deadlineInput.value = "";
+            categoryInput.value = "";
+
+            const {
+                data: {
+                    id,
+                    contents,
+                    deadline,
+                    category
+                }
+            } = json;
+
+            const tr = document.createElement('tr');
+            tr.classList.add('taskInfo');
+
+            const contentsTd = document.createElement('td');
+            contentsTd.textContent = contents;
+
+            const deadlineTd = document.createElement('td');
+            deadlineTd.textContent = deadline;
+
+            const categoryTd = document.createElement('td');
+            const categoryLink = document.createElement('a');
+            // 分割代入
+            const {
+                name
+            } = category;
+            // const category = json.category;
+
+            categoryLink.href = 'searchCategory.php?name=' + name;
+            categoryLink.textContent = name;
+            categoryLink.classList.add('category-name');
+            categoryTd.appendChild(categoryLink);
+
+            tr.appendChild(contentsTd);
+            tr.appendChild(deadlineTd);
+            tr.appendChild(categoryTd);
+
+            const tbody = document.querySelector('.tbody');
+            tbody.appendChild(tr);
+        }
+    }, false);
+</script>
 
 </html>

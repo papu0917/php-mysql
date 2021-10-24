@@ -24,8 +24,8 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
         $taskMapper = $this->taskDao->findById($id->value());
 
         $category = CategoryFactory::create(
-            $taskMapper['category_id'],
-            $taskMapper['category_name']
+            $taskMapper['categoryId'],
+            $taskMapper['categoryName']
         );
 
         $task = TaskFactory::create(
@@ -39,16 +39,18 @@ final class TaskMySqlRepository implements TaskRepositoryInterface
         return $task;
     }
 
-    public function insert(Task $task)
+    public function insert(Task $task): TaskId
     {
         $category = $this->categoryDao->findById($task->categoryId());
 
-        $this->taskDao->insert(
+        $taskId = $this->taskDao->insert(
             $task->userId()->value(),
             $task->contents()->value(),
             $task->deadline(),
             $category['id']
         );
+
+        return new TaskId($taskId);
     }
 
     public function update(Task $task)

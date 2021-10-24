@@ -13,7 +13,7 @@ final class TaskDao extends Dao
         string $contents,
         DateTime $deadline,
         int $category_id
-    ) {
+    ): int {
         $sql = <<<EOF
             INSERT INTO 
                 tasks 
@@ -27,7 +27,8 @@ EOF;
         $stmt->bindValue(':contents', $contents, PDO::PARAM_STR);
         $stmt->bindValue(':category_id', $category_id, PDO::PARAM_STR);
         $stmt->bindValue(':deadline', $deadline->format('Y-m-d'), PDO::PARAM_STR);
-        return $stmt->execute();
+        $stmt->execute();
+        return $this->pdo->lastInsertId();
     }
 
     public function findAllByUserId(int $userId): array

@@ -33,10 +33,10 @@ final class CategoryDao extends Dao
         //     user_id = :user_id 
         //     and status = 0
         // EOF;
-        //         $stmt = $this->pdo->prepare($sql);
-        //         $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
-        //         $res = $stmt->execute();
-        //         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // $stmt = $this->pdo->prepare($sql);
+        // $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+        // $res = $stmt->execute();
+        // return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function findById(int $id): ?array
@@ -58,12 +58,13 @@ final class CategoryDao extends Dao
         return ($category === false) ? null : $category;
     }
 
-    public function insert(string $name): string
+    public function insert(string $name): int
     {
         $sql = "INSERT INTO categories (name) VALUES (:name)";
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':name', $name, PDO::PARAM_STR);
-        return $stmt->execute();
+        $stmt->execute();
+        return $this->pdo->lastInsertId();
     }
 
     public function update(int $id, string $name): string

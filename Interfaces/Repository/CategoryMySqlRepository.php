@@ -21,9 +21,10 @@ final class CategoryMySqlRepository
         );
     }
 
-    public function insert(Category $category)
+    public function insert(Category $category): CategoryId
     {
-        $this->categoryDao->insert($category->name()->value());
+        $categoryId = $this->categoryDao->insert($category->name()->value());
+        return new CategoryId($categoryId);
     }
 
     public function update(Category $category)
