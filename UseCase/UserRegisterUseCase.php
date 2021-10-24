@@ -6,19 +6,12 @@ require_once __DIR__ . '/../Domain/Factory/NewUserFactory.php';
 final class UserRegisterUseCase
 {
     private $userMysqlRepository;
-    private $name;
-    private $email;
-    private $password;
+    private $input;
 
-    public function __construct(
-        string $name,
-        string $email,
-        string $password
-    ) {
+    public function __construct(UserResisterUseCaseInput $input)
+    {
         $this->userMysqlRepository = new UserMysqlRepository();
-        $this->name = $name;
-        $this->email = $email;
-        $this->password = $password;
+        $this->input = $input;
     }
 
     public function handler(): array
@@ -37,7 +30,7 @@ final class UserRegisterUseCase
 
     private function existsSameEmailUser(): bool
     {
-        $email = new UserEmail($this->email);
+        $email = new UserEmail($this->input->email());
         $user = $this->userMysqlRepository->findByEmail($email);
         return !is_null($user);
     }
@@ -45,9 +38,9 @@ final class UserRegisterUseCase
     private function register(): void
     {
         $newUser = NewUserFactory::create(
-            $this->name,
-            $this->email,
-            $this->password
+            $this->input->name(),
+            $this->input->email(),
+            $this->input->password()
         );
         $this->userMysqlRepository->insert($newUser);
     }
