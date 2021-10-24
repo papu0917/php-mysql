@@ -7,6 +7,7 @@ require_once __DIR__ . '/Domain/Entity/User.php';
 require_once __DIR__ . '/Interfaces/Repository/UserMySqlRepository.php';
 require_once(__DIR__ . '/UseCase/UserRegisterUseCase.php');
 require_once(__DIR__ . '/Domain/Factory/UserFactory.php');
+require_once __DIR__ . '/UseCase/UseCaseInput/UserResisterUseCaseInput.php';
 date_default_timezone_set('Asia/Tokyo');
 
 // (1) 登録するデータを用意
@@ -38,6 +39,7 @@ if (count($errorMessages) != 0) {
     die;
 }
 
-$userRegisterUseCase = new UserRegisterUseCase($name, $email, $password);
-$result = $userRegisterUseCase->handler();
-echo implode("", $result);
+$useCaseInput = new UserResisterUseCaseInput($name, $email, $password);
+$useCase = new UserRegisterUseCase($useCaseInput);
+$user = $useCase->handler();
+echo implode("", $user);
