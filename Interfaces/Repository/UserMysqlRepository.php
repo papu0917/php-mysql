@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../../Infrastructure/Dao/UserDao.php';
-// require_once __DIR__ . '/../../Domain/Entity/NewUser.php';
 require_once __DIR__ . '/../../Domain/Factory/UserFactory.php';
 
 final class UserMysqlRepository
