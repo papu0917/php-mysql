@@ -11,7 +11,6 @@ final class UserSignInUseCase
     public function __construct(UserSignInUseCaseInput $input)
     {
         $this->userRepository = new UserMysqlRepository();
-        $this->categoryRepository = new CategoryMySqlRepository();
         $this->input = $input;
     }
 
