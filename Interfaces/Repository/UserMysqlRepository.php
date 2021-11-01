@@ -20,22 +20,19 @@ final class UserMysqlRepository
         );
     }
 
-    public function findByEmail(UserEmail $user)
+    public function findByEmail(UserEmail $user): ?User
     {
         $userMapper = $this->userDao->findByEmail($user->value());
-        return $userMapper;
-        // var_dump($userMapper);
-        // die;
 
-        // if (is_null($userMapper)) {
-        //     return null;
-        // }
+        if (is_null($userMapper)) {
+            return null;
+        }
 
-        // return UserFactory::create(
-        //     $userMapper['id'],
-        //     $userMapper['name'],
-        //     $userMapper['email'],
-        //     $userMapper['password']
-        // );
+        return UserFactory::create(
+            $userMapper['id'],
+            $userMapper['name'],
+            $userMapper['email'],
+            $userMapper['password']
+        );
     }
 }
