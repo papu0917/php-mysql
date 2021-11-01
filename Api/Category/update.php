@@ -4,6 +4,7 @@ require('../redirect.php');
 require_once __DIR__ . '/../Interfaces/Repository/CategoryMySqlRepository.php';
 require_once __DIR__ . '/../Domain/ValueObject/CategoryId.php';
 require_once __DIR__ . '/../Domain/ValueObject/CategoryName.php';
+require_once __DIR__ . '/../Domain/ValueObject/CategoryName.php';
 
 $id = $_POST['category_id'];
 $name = filter_input(INPUT_POST, 'category_name');

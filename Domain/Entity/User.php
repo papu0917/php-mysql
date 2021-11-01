@@ -44,4 +44,9 @@ final class User
     {
         return $this->password;
     }
+
+    public function verifyPassword(string $password): bool
+    {
+        return password_verify($password, $this->password->value());
+    }
 }

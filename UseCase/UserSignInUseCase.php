@@ -2,6 +2,7 @@
 
 require_once(__DIR__ . '/../Infrastructure/Dao/UserDao.php');
 require_once __DIR__ . '/../Interfaces/Repository/UserMySqlRepository.php';
+require_once __DIR__ . '/UseCaseOutput/UserSignInUseCaseOutput.php';
 
 final class UserSignInUseCase
 {
@@ -14,11 +15,30 @@ final class UserSignInUseCase
         $this->input = $input;
     }
 
-    public function handler()
+    public function handler(): UserSignInUseCaseOutput
     {
-        $userEmail = $this->userRepository->findByEmail(
-            new UserEmail($this->input->email())
-        );
-        return $userEmail;
+        $user = $this->userRepository->findByEmail($this->input->email());
+
+        if (is_null($user)) {
+            return $this->createOutput(false);
+        }
+
+        if (!$user->verifyPassword($this->input->password())) {
+            return $this->createOutput(false);
+        }
+
+        $this->saveSession($user);
+        return $this->createOutput(true);
+    }
+
+    private function createOutput(bool $isSuccess): UserSignInUseCaseOutput
+    {
+        return new UserSignInUseCaseOutput($isSuccess);
+    }
+
+    private function saveSession(User $user): void
+    {
+        $session = Session::getInstance();
+        $session->setAuth($user->id()->value(), $user->name()->value());
     }
 }

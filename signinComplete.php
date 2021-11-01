@@ -24,16 +24,10 @@ if (!$signInInputError->isEmpty()) {
 }
 
 $userEmail = new UserEmail($email);
-$useCaseInput = new UserSignInUseCaseInput($userEmail->value());
+$useCaseInput = new UserSignInUseCaseInput($userEmail, $password);
 $useCase = new UserSignInUseCase($useCaseInput);
-$user = $useCase->handler();
-
-$isValid = password_verify($password, $user['password']);
-$signInViewModel = new SignInViewModel($isValid);
-if ($isValid) {
-    $session = Session::getInstance();
-    $session->setAuth($user['id'], $user['name']);
-}
+$useCaseOutput = $useCase->handler();
+$signInViewModel = new SignInViewModel($useCaseOutput->isSuccess());
 ?>
 <!DOCTYPE html>
 <html>
