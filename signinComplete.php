@@ -7,6 +7,7 @@ require_once __DIR__ . '/Domain/Entity/User.php';
 require_once __DIR__ . '/Domain/Entity/User.php';
 require_once __DIR__ . '/UseCase/UseCaseInput/UserSignInUseCaseInput.php';
 require_once __DIR__ . '/UseCase/UserSignInUseCase.php';
+require_once __DIR__ . '/Lib/Redirect.php';
 
 $email = filter_input(INPUT_POST, 'email');
 $password = filter_input(INPUT_POST, 'password');
@@ -18,9 +19,8 @@ if (!$signInInputError->isEmpty()) {
     $session = Session::getInstance();
     $session->setSignInInputErrorMessages($signInInputError, $email);
 
-    // TODO: Redirectクラスを使う
-    header('Location: /signin.php');
-    die;
+    $path = '/signin.php';
+    Redirect::handler($path);
 }
 
 $userEmail = new UserEmail($email);
