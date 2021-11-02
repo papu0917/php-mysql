@@ -27,7 +27,7 @@ final class CategoryMySqlRepository
         return new CategoryId($categoryId);
     }
 
-    public function update(Category $category)
+    public function update(Category $category): void
     {
         $this->categoryDao->update(
             $category->id()->value(),
@@ -35,7 +35,7 @@ final class CategoryMySqlRepository
         );
     }
 
-    public function delete(CategoryId $id)
+    public function delete(CategoryId $id): void
     {
         $this->categoryDao->delete($id->value());
     }

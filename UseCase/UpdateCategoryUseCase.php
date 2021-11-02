@@ -15,12 +15,16 @@ final class UpdateCategoryUseCase
         $this->input = $input;
     }
 
-    public function handler()
+    public function handler(): void
     {
         $updateCategory = new Category(
             new CategoryId($this->input->id()),
             new CategoryName($this->input->name())
         );
         $this->categoryRepository->update($updateCategory);
+    }
+
+    private function update(): void
+    {
     }
 }

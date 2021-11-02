@@ -8,23 +8,15 @@ require_once __DIR__ . '/../UseCase/UseCaseInput/UpdateCategoryUseCaseInput.php'
 
 $id = $_POST['category_id'];
 $name = filter_input(INPUT_POST, 'category_name');
-if (!$name) {
-    $message = '更新に失敗しました。カテゴリーを確認してください';
-    echo $message;
-    die;
-} else {
-    // $updateCategory = new Category(
-    //     new CategoryId($id),
-    //     new CategoryName($name)
-    // );
+// if (!$name) {
+//     $message = '更新に失敗しました。カテゴリーを確認してください';
+//     echo $message;
+//     die;
+// }
 
-    $useCaseInput = new UpdateCategoryUseCaseInput($id, $name);
-    $useCase = new UpdateCategoryUseCase($useCaseInput);
-    $useCase->handler();
+$useCaseInput = new UpdateCategoryUseCaseInput($id, $name);
+$useCase = new UpdateCategoryUseCase($useCaseInput);
+$useCase->handler();
 
-
-    // $categoryRepository = new CategoryMySqlRepository();
-    // $categoryRepository->update($updateCategory);
-    $path = '/category/index.php';
-    Redirect::handler($path);
-}
+$path = '/category/index.php';
+Redirect::handler($path);
