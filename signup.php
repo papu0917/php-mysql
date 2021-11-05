@@ -26,8 +26,7 @@ unset($_SESSION['errorMessages'], $_SESSION['formInputs']);
                 </ul>
             <?php endif; ?>
 
-
-            <form action="signupComplete.php" method="post">
+            <form action="signupConfirm.php" method="post">
                 <div>
                     <input class="width" type="text" name="name" placeholder="User name" value="<?php echo $formInputs['name'] ?? ''; ?>" />
                 </div>

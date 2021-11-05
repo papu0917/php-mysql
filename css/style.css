@@ -359,3 +359,10 @@ display: table-row-group;
 .message p {
     margin: 10px;
 }
+
+#signup .index thead, tbody tr {
+    width: 65%;
+    margin: 0px auto;
+    display:table;
+    table-layout:fixed; 
+}
