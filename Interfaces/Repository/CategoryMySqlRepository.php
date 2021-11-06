@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../Infrastructure/Dao/CategoryDao.php';
 require_once __DIR__ . '/../../Domain/Entity/Category.php';
+require_once __DIR__ . '/../Exception/RepositoryException.php';
 
 final class CategoryMySqlRepository
 {
@@ -29,10 +30,14 @@ final class CategoryMySqlRepository
 
     public function update(Category $category): void
     {
-        $this->categoryDao->update(
-            $category->id()->value(),
-            $category->name()->value()
-        );
+        try {
+            $this->categoryDao->update(
+                $category->id()->value(),
+                $category->name()->value()
+            );
+        } catch (DaoException $e) {
+            throw new RepositoryException('カテゴリーの更新時にエラーが発生しました。', 0, $e);
+        }
     }
 
     public function delete(CategoryId $id): void

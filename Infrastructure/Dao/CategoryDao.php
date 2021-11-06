@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/Dao.php';
-
+require_once __DIR__ . '/../Exception/DaoException.php';
 final class CategoryDao extends Dao
 {
 
@@ -72,7 +72,12 @@ final class CategoryDao extends Dao
         $stmt = $this->pdo->prepare("UPDATE categories SET name = :name where id = :id");
         $stmt->bindValue(':id', $id, PDO::PARAM_STR);
         $stmt->bindValue(':name', $name, PDO::PARAM_STR);
-        return $stmt->execute();
+
+        try {
+            return $stmt->execute();
+        } catch (Exception $e) {
+            throw new DaoException('カテゴリーの更新時にエラーが発生しました', 0, $e);
+        }
     }
 
     public function delete(int $id)
@@ -85,6 +90,11 @@ final class CategoryDao extends Dao
 EOF;
         $stmt = $this->pdo->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_STR);
-        return $stmt->execute();
+
+        try {
+            return $stmt->execute();
+        } catch (Exception $e) {
+            throw new DaoException('カテゴリーの削除時にエラーが発生しました');
+        }
     }
 }

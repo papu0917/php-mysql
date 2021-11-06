@@ -3,9 +3,9 @@
 require_once(__DIR__ . '/../Infrastructure/Dao/UserDao.php');
 require_once __DIR__ . '/../Interfaces/Repository/UserMySqlRepository.php';
 require_once __DIR__ . '/UseCaseOutput/UserSignInUseCaseOutput.php';
-require_once __DIR__ . '/UseCaseInterface/UserSignInUseCaseInterface.php';
+require_once __DIR__ . '/UseCaseInterface/UsreSignInUseCaseInterface.php';
 
-final class UserSignInUseCase implements UserSignInUseCaseInterface
+final class UserSignInFromAndroidUseCase implements UsreSignInUseCaseInterface
 {
     private $userRepository;
     private $input;
@@ -24,11 +24,16 @@ final class UserSignInUseCase implements UserSignInUseCaseInterface
             return $this->createOutput(false);
         }
 
+        if (isAndroid()) {
+            //hogehoge()
+        }
+
         if (!$user->verifyPassword($this->input->password())) {
             return $this->createOutput(false);
         }
 
         $this->saveSession($user);
+
         return $this->createOutput(true);
     }
 

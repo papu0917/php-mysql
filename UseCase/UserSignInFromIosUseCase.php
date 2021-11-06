@@ -3,9 +3,9 @@
 require_once(__DIR__ . '/../Infrastructure/Dao/UserDao.php');
 require_once __DIR__ . '/../Interfaces/Repository/UserMySqlRepository.php';
 require_once __DIR__ . '/UseCaseOutput/UserSignInUseCaseOutput.php';
-require_once __DIR__ . '/UseCaseInterface/UserSignInUseCaseInterface.php';
+require_once __DIR__ . '/UseCaseInterface/UsreSignInUseCaseInterface.php';
 
-final class UserSignInUseCase implements UserSignInUseCaseInterface
+final class UserSignInFromIosUseCase implements UsreSignInUseCaseInterface
 {
     private $userRepository;
     private $input;
@@ -29,6 +29,9 @@ final class UserSignInUseCase implements UserSignInUseCaseInterface
         }
 
         $this->saveSession($user);
+
+        $this->pushNotification();
+
         return $this->createOutput(true);
     }
 
@@ -39,7 +42,16 @@ final class UserSignInUseCase implements UserSignInUseCaseInterface
 
     private function saveSession(User $user): void
     {
+        if (isAndroid()) {
+        }
+
+        if (isIos()) {
+        }
         $session = Session::getInstance();
         $session->setAuth($user->id()->value(), $user->name()->value());
+    }
+
+    private function pushNotification(): void
+    {
     }
 }

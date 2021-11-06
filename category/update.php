@@ -6,17 +6,23 @@ require_once __DIR__ . '/../Lib/Redirect.php';
 require_once __DIR__ . '/../UseCase/UpdateCategoryUseCase.php';
 require_once __DIR__ . '/../UseCase/UseCaseInput/UpdateCategoryUseCaseInput.php';
 
-$id = $_POST['category_id'];
+$id = filter_input(INPUT_POST, 'category_id');
 $name = filter_input(INPUT_POST, 'category_name');
-// if (!$name) {
-//     $message = '更新に失敗しました。カテゴリーを確認してください';
-//     echo $message;
-//     die;
-// }
 
-$useCaseInput = new UpdateCategoryUseCaseInput($id, $name);
-$useCase = new UpdateCategoryUseCase($useCaseInput);
-$useCase->handler();
+// バリデーション
+if (empty($name)) {
+	// TODO: セッションにエラーメッセージを持たせてリダイレクトする
+	die('カテゴリー名が空です');
+}
 
-$path = '/category/index.php';
-Redirect::handler($path);
+try {
+	$useCaseInput = new UpdateCategoryUseCaseInput($id, $name);
+	$useCase = new UpdateCategoryUseCase($useCaseInput);
+	$useCase->handler();
+	$path = '/category/index.php';
+	Redirect::handler($path);
+} catch (Exception $e) {
+	// TODO: セッションにエラーメッセージを持たせてリダイレクトする
+	echo $e->getMessage();
+	die;
+}

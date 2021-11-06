@@ -3,9 +3,9 @@
 require_once(__DIR__ . '/../Infrastructure/Dao/UserDao.php');
 require_once __DIR__ . '/../Interfaces/Repository/UserMySqlRepository.php';
 require_once __DIR__ . '/UseCaseOutput/UserSignInUseCaseOutput.php';
-require_once __DIR__ . '/UseCaseInterface/UserSignInUseCaseInterface.php';
+require_once __DIR__ . '/UseCaseInterface/UsreSignInUseCaseInterface.php';
 
-final class UserSignInUseCase implements UserSignInUseCaseInterface
+final class UserSignInFromWebUseCase implements UsreSignInUseCaseInterface
 {
     private $userRepository;
     private $input;
