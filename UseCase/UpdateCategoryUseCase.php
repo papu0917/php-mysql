@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../Interfaces/Repository/CategoryMySqlRepository.php';
 require_once __DIR__ . '/UseCaseInput/UpdateCategoryUseCaseInput.php';
-require_once __DIR__ . '/../Exception/UseCaseException.php';
+require_once __DIR__ . '/Exception/UseCaseException.php';
 require_once __DIR__ . '/UseCaseInterface/UpdateCategoryUseCaseInterface.php';
 
 final class UpdateCategoryUseCase implements UpdateCategoryUseCaseInterface

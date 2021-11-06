@@ -42,6 +42,10 @@ final class CategoryMySqlRepository
 
     public function delete(CategoryId $id): void
     {
-        $this->categoryDao->delete($id->value());
+        try {
+            $this->categoryDao->delete($id->value());
+        } catch (DaoException $e) {
+            throw new RepositoryException('カテゴリーの削除時にエラーが発生しました。', $e);
+        }
     }
 }
