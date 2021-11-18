@@ -1,9 +1,32 @@
 <?php
+ini_set('display_errors', 'off');
 session_start();
 $errorMessages = $_SESSION['errorMessages'] ?? [];
 $formInputs = $_SESSION['formInputs'] ?? [];
 unset($_SESSION['errorMessages'], $_SESSION['formInputs']);
 
+$error = [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = filter_input(INPUT_POST, 'name');
+    $email = filter_input(INPUT_POST, 'email');
+    $password = filter_input(INPUT_POST, 'password');
+    $passwordConfirm = filter_input(INPUT_POST, 'passwordConfirm');
+    $reg_str = "/^([a-zA-Z0-9])+([a-zA-Z0-9._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9._-]+)+$/";
+    if ($name === '') {
+        $error['name'] = 'blank';
+    }
+    if ($email === '') {
+        $error['email'] = 'blank';
+    } elseif (!preg_match($reg_str, $email)) {
+        $error['email'] = 'email';
+    }
+    if ($password === '') {
+        $error['password'] = 'blank';
+    }
+    if ($passwordConfirm === '') {
+        $error['passwordConfirm'] = 'blank';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,19 +49,32 @@ unset($_SESSION['errorMessages'], $_SESSION['formInputs']);
                 </ul>
             <?php endif; ?>
 
-            <form action="signupConfirm.php" method="post">
+            <form action="" method="post" novalidate>
                 <div>
-                    <input class="width" type="text" name="name" placeholder="User name" value="<?php echo $formInputs['name'] ?? ''; ?>" />
+                    <input class="width" type="text" name="name" placeholder="User name" required autofocus value="<?php echo $name ?? ''; ?>" />
+
                 </div>
+                <?php if ($error['name'] === 'blank') : ?>
+                    <p class="error_message">お名前を入力してください</p>
+                <?php endif; ?>
                 <div>
-                    <input class="width" type="text" name="email" placeholder="Email" value="<?php echo $formInputs['email'] ?? ''; ?>" />
+                    <input class="width" type="text" name="email" placeholder="Email" value="<?php echo $email ?? ''; ?>" />
                 </div>
+                <?php if ($error['email'] === 'email') : ?>
+                    <p class="error_message">メールアドレスを正しく入力してください</p>
+                <?php endif; ?>
                 <div>
                     <input class="width" type="password" name="password" placeholder="Password">
                 </div>
+                <?php if ($error['password'] === 'blank') : ?>
+                    <p class="error_message">パスワードを入力してください</p>
+                <?php endif; ?>
                 <div>
                     <input class="width" type="password" name="passwordConfirm" placeholder="Password 確認">
                 </div>
+                <?php if ($error['passwordConfirm'] === 'blank') : ?>
+                    <p class="error_message">パスワードを入力してください</p>
+                <?php endif; ?>
                 <div>
                     <input class="input" type="submit" value="アカウント作成" />
                 </div>

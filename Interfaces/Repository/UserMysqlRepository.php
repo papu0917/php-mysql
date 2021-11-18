@@ -20,9 +20,26 @@ final class UserMysqlRepository
         );
     }
 
+    // TODO: $user → $emailに変更する
     public function findByEmail(UserEmail $user): ?User
     {
         $userMapper = $this->userDao->findByEmail($user->value());
+
+        if (is_null($userMapper)) {
+            return null;
+        }
+
+        return UserFactory::create(
+            $userMapper['id'],
+            $userMapper['name'],
+            $userMapper['email'],
+            $userMapper['password']
+        );
+    }
+
+    public function findById(UserId $userId): ?User
+    {
+        $userMapper = $this->userDao->findById($userId->value());
 
         if (is_null($userMapper)) {
             return null;

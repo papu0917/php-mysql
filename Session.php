@@ -2,6 +2,8 @@
 
 final class Session
 {
+    const ERROR_KEY = 'errors';
+
     private static $instance;
 
     private function __construct()
@@ -27,6 +29,11 @@ final class Session
         }
     }
 
+    public function get(string $key)
+    {
+        return $_SESSION[$key] ?? null;
+    }
+
     public function setAuth(int $id, string $name): void
     {
         $_SESSION['id'] = $id;
@@ -35,12 +42,19 @@ final class Session
 
     public function appendError(string $errorMessage): void
     {
-        $_SESSION['errors'][] = $errorMessage;
+        $_SESSION[self::ERROR_KEY][] = $errorMessage;
+    }
+
+    public function loadErrorsWithDestory(): array
+    {
+        $errors = $this->get(self::ERROR_KEY);
+        $this->clearErrors();
+        return $errors ?? [];
     }
 
     public function clearErrors(): void
     {
-        unset($_SESSION['errors']);
+        unset($_SESSION[self::ERROR_KEY]);
     }
 
     public function clearAuth(): void

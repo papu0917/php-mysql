@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/../Session.php');
-Session::getInstance();
+$session = Session::getInstance();
+$errors = $session->loadErrorsWithDestory();
 
 require('getCategories.php');
 // require('../getTask.php');
@@ -31,13 +32,17 @@ require('getCategories.php');
                     </form>
                 </div>
                 <div class=" table">
+                    <?php foreach ($errors as $error) : ?>
+                        <p><?php echo $error; ?></p>
+                    <?php endforeach; ?>
+
                     <table class="table-list">
                         <?php foreach ($categories as $category) : ?>
                             <tr class="category">
                                 <td><?php echo $category['name']; ?></td>
                                 <td><a class="botann1" href="edit.php?id=<?php echo $category['id']; ?>">編集</a></td>
                                 <td>
-                                    <form action="delete.php" method="post">
+                                    <form action="delete.php" method="post">
                                         <input type="submit" class="botann2" name="delete" value="削除" />
                                         <input type="hidden" name="id" value="<?php echo $category['id']; ?>">
                                     </form>

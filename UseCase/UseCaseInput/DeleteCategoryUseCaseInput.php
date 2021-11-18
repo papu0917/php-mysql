@@ -2,18 +2,18 @@
 
 final class DeleteCategoryUseCaseInput
 {
-    private $id;
+    private $categoryId;
     private $userId;
 
-    public function __construct(int $id, int $userId)
+    public function __construct(int $categoryId, int $userId)
     {
-        $this->id = $id;
+        $this->categoryId = $categoryId;
         $this->userId = $userId;
     }
 
-    public function id(): int
+    public function categoryId(): int
     {
-        return $this->id;
+        return $this->categoryId;
     }
 
     public function userId(): int

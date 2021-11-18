@@ -1,13 +1,17 @@
 <?php
 ini_set('display_errors', 'on');
 require_once(__DIR__ . '/Session.php');
+require_once(__DIR__ . '/Lib/Redirect.php');
 require_once(__DIR__ . '/Category/getCategories.php');
-$session = Session::getInstance();
-
 require_once __DIR__ . '/Interfaces/Repository/TaskMySqlRepository.php';
 require_once __DIR__ . '/Domain/ValueObject/UserId.php';
-
+$session = Session::getInstance();
 $userId = $_SESSION['id'];
+if (empty($userId)) {
+    $path = '/signin.php';
+    Redirect::handler($path);
+}
+
 $taskId = new TaskId($userId);
 $taskRepositroy = new TaskMySqlRepository();
 $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
@@ -29,9 +33,6 @@ $incompleteTasks = $taskRepositroy->findAllByUserId($taskId);
                 <div class="uncomplete-button"><a href="">未完了</a></div>
                 <div class="complete-button"><a class="complete" href="../complete/index.php">完了</a></div>
             </div>
-
-
-
             <form action="" method="post">
                 <div class="box">
                     <input class="box-001 contents" type="text" name="contents" placeholder="タスクを追加" value="<?php echo $formInputs['contents'] ?? ''; ?>" />
